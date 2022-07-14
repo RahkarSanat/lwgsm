@@ -54,7 +54,7 @@ lwgsm_thread_produce(void* const arg) {
 
     /* Thread is running, unlock semaphore */
     if (lwgsm_sys_sem_isvalid(sem)) {
-        lwgsm_sys_sem_release(sem);             /* Release semaphore */
+        lwgsm_sys_sem_release(sem); /* Release semaphore */
     }
 
     lwgsm_core_lock();
@@ -63,11 +63,11 @@ lwgsm_thread_produce(void* const arg) {
         do {
             time = lwgsm_sys_mbox_get(&e->mbox_producer, (void**)&msg, 0);  /* Get message from queue */
         } while (time == LWGSM_SYS_TIMEOUT || msg == NULL);
-        LWGSM_THREAD_PRODUCER_HOOK();           /* Execute producer thread hook */
+        LWGSM_THREAD_PRODUCER_HOOK(); /* Execute producer thread hook */
         lwgsm_core_lock();
 
-        res = lwgsmOK;                          /* Start with OK */
-        e->msg = msg;                           /* Set message handle */
+        res = lwgsmOK; /* Start with OK */
+        e->msg = msg;  /* Set message handle */
 
         /*
          * This check is performed when adding command to queue
@@ -83,14 +83,14 @@ lwgsm_thread_produce(void* const arg) {
             if (msg->msg.reset.delay > 0) {
                 lwgsm_delay(msg->msg.reset.delay);
             }
-            lwgsmi_reset_everything(1);         /* Reset stack before trying to reset */
+            lwgsmi_reset_everything(1); /* Reset stack before trying to reset */
         }
 
         /*
          * Try to call function to process this message
          * Usually it should be function to transmit data to AT port
          */
-        if (res == lwgsmOK && msg->fn != NULL) {/* Check for callback processing function */
+        if (res == lwgsmOK && msg->fn != NULL) { /* Check for callback processing function */
             /*
              * Obtain semaphore
              * This code should not block at any point.
@@ -98,16 +98,18 @@ lwgsm_thread_produce(void* const arg) {
              * immediate terminate
              */
             lwgsm_core_unlock();
-            lwgsm_sys_sem_wait(&e->sem_sync, 0);/* First call */
+            lwgsm_sys_sem_wait(&e->sem_sync, 0); /* First call */
             lwgsm_core_lock();
-            res = msg->fn(msg);                 /* Process this message, check if command started at least */
-            time = ~LWGSM_SYS_TIMEOUT;          /* Reset time */
-            if (res == lwgsmOK) {               /* We have valid data and data were sent */
+            res = msg->fn(msg);        /* Process this message, check if command started at least */
+            time = ~LWGSM_SYS_TIMEOUT; /* Reset time */
+            if (res == lwgsmOK) {      /* We have valid data and data were sent */
                 lwgsm_core_unlock();
-                time = lwgsm_sys_sem_wait(&e->sem_sync, msg->block_time);   /* Second call; Wait for synchronization semaphore from processing thread or timeout */
+                time = lwgsm_sys_sem_wait(
+                           &e->sem_sync,
+                           msg->block_time); /* Second call; Wait for synchronization semaphore from processing thread or timeout */
                 lwgsm_core_lock();
-                if (time == LWGSM_SYS_TIMEOUT) {/* Sync timeout occurred? */
-                    res = lwgsmTIMEOUT;         /* Timeout on command */
+                if (time == LWGSM_SYS_TIMEOUT) { /* Sync timeout occurred? */
+                    res = lwgsmTIMEOUT;            /* Timeout on command */
                 }
             }
 
@@ -116,11 +118,9 @@ lwgsm_thread_produce(void* const arg) {
                 lwgsmi_send_cb(LWGSM_EVT_CMD_TIMEOUT);
             }
 
-            LWGSM_DEBUGW(LWGSM_CFG_DBG_THREAD | LWGSM_DBG_TYPE_TRACE | LWGSM_DBG_LVL_SEVERE,
-                         res == lwgsmTIMEOUT,
+            LWGSM_DEBUGW(LWGSM_CFG_DBG_THREAD | LWGSM_DBG_TYPE_TRACE | LWGSM_DBG_LVL_SEVERE, res == lwgsmTIMEOUT,
                          "[LWGSM THREAD] Timeout in produce thread waiting for command to finish in process thread\r\n");
-            LWGSM_DEBUGW(LWGSM_CFG_DBG_THREAD | LWGSM_DBG_TYPE_TRACE | LWGSM_DBG_LVL_SEVERE,
-                         res != lwgsmOK && res != lwgsmTIMEOUT,
+            LWGSM_DEBUGW(LWGSM_CFG_DBG_THREAD | LWGSM_DBG_TYPE_TRACE | LWGSM_DBG_LVL_SEVERE, res != lwgsmOK && res != lwgsmTIMEOUT,
                          "[LWGSM THREAD] Could not start execution for command %d\r\n", (int)msg->cmd);
 
             /*
@@ -142,20 +142,20 @@ lwgsm_thread_produce(void* const arg) {
             lwgsm_sys_sem_release(&e->sem_sync);
         } else {
             if (res == lwgsmOK) {
-                res = lwgsmERR;                 /* Simply set error message */
+                res = lwgsmERR; /* Simply set error message */
             }
         }
         if (res != lwgsmOK) {
             /* Process global callbacks */
             lwgsmi_process_events_for_timeout_or_error(msg, res);
 
-            msg->res = res;                     /* Save response */
+            msg->res = res; /* Save response */
         }
 
 #if LWGSM_CFG_USE_API_FUNC_EVT
         /* Send event function to user */
         if (msg->evt_fn != NULL) {
-            msg->evt_fn(msg->res, msg->evt_arg);/* Send event with user argument */
+            msg->evt_fn(msg->res, msg->evt_arg); /* Send event with user argument */
         }
 #endif /* LWGSM_CFG_USE_API_FUNC_EVT */
 
@@ -191,7 +191,7 @@ lwgsm_thread_process(void* const arg) {
 
     /* Thread is running, unlock semaphore */
     if (lwgsm_sys_sem_isvalid(sem)) {
-        lwgsm_sys_sem_release(sem);             /* Release semaphore */
+        lwgsm_sys_sem_release(sem); /* Release semaphore */
     }
 
 #if !LWGSM_CFG_INPUT_USE_PROCESS
@@ -199,14 +199,14 @@ lwgsm_thread_process(void* const arg) {
     while (1) {
         lwgsm_core_unlock();
         time = lwgsmi_get_from_mbox_with_timeout_checks(&e->mbox_process, (void**)&msg, 10);
-        LWGSM_THREAD_PROCESS_HOOK();            /* Execute process thread hook */
+        LWGSM_THREAD_PROCESS_HOOK(); /* Execute process thread hook */
         lwgsm_core_lock();
 
         if (time == LWGSM_SYS_TIMEOUT || msg == NULL) {
-            LWGSM_UNUSED(time);                 /* Unused variable */
+            LWGSM_UNUSED(time); /* Unused variable */
         }
-        lwgsmi_process_buffer();                /* Process input data */
-#else /* LWGSM_CFG_INPUT_USE_PROCESS */
+        lwgsmi_process_buffer(); /* Process input data */
+#else                        /* LWGSM_CFG_INPUT_USE_PROCESS */
     while (1) {
         /*
          * Check for next timeout event only here
@@ -215,8 +215,8 @@ lwgsm_thread_process(void* const arg) {
          * In case new timeout occurs, thread will wake up by writing new element to mbox process queue
          */
         time = lwgsmi_get_from_mbox_with_timeout_checks(&e->mbox_process, (void**)&msg, 0);
-        LWGSM_THREAD_PROCESS_HOOK();            /* Execute process thread hook */
+        LWGSM_THREAD_PROCESS_HOOK(); /* Execute process thread hook */
         LWGSM_UNUSED(time);
-#endif /* !LWGSM_CFG_INPUT_USE_PROCESS */
+#endif                       /* !LWGSM_CFG_INPUT_USE_PROCESS */
     }
 }

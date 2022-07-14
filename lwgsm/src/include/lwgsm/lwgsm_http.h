@@ -49,6 +49,47 @@ extern "C" {
  * Currently it is under development
  *
  */
+lwgsmr_t lwgsm_http_enable_gprs(const lwgsm_api_cmd_evt_fn evt_fn, void* const evt_arg, const uint32_t blocking);
+
+// INITILAIZE function
+lwgsmr_t lwgsm_http_init(const lwgsm_api_cmd_evt_fn evt_fn, void* const evt_arg, const uint32_t blocking);
+
+// Terminate function
+lwgsmr_t lwgsm_http_terminate(const lwgsm_api_cmd_evt_fn evt_fn, void* const evt_arg, const uint32_t blocking);
+
+// Set Parameter Data
+lwgsmr_t lwgsm_http_set_parameter(const char* key, const char* value, const lwgsm_api_cmd_evt_fn evt_fn, void* const evt_arg,
+                                  const uint32_t blocking);
+
+// Read Parameter Data
+lwgsmr_t lwgsm_http_read_parameter(const lwgsm_api_cmd_evt_fn evt_fn, void* const evt_arg, const uint32_t blocking);
+
+// Set HTTP method
+lwgsmr_t lwgsm_http_set_method(uint8_t method, const lwgsm_api_cmd_evt_fn evt_fn, void* const evt_arg, const uint32_t blocking);
+
+// Set Data
+lwgsmr_t lwgsm_http_set_data(const lwgsm_api_cmd_evt_fn evt_fn, void* const evt_arg, const uint32_t blocking);
+
+// Read HTTP Response
+lwgsmr_t lwgsm_http_read_response(uint8_t* buf, size_t start, size_t end, const lwgsm_api_cmd_evt_fn evt_fn, void* const evt_arg,
+                                  const uint32_t blocking);
+
+// Save Context
+lwgsmr_t lwgsm_http_save_context(const lwgsm_api_cmd_evt_fn evt_fn, void* const evt_arg, const uint32_t blocking);
+
+// Read HTTP Status
+lwgsmr_t lwgsm_http_status(const lwgsm_api_cmd_evt_fn evt_fn, void* const evt_arg, const uint32_t blocking);
+
+// Read HTTP Header information
+lwgsmr_t lwgsm_http_response_header_info(const lwgsm_api_cmd_evt_fn evt_fn, void* const evt_arg, const uint32_t blocking);
+
+lwgsmr_t lwgsm_sapbr_enable_gprs(uint8_t cid, const lwgsm_api_cmd_evt_fn evt_fn, void* const evt_arg, const uint32_t blocking);
+
+lwgsmr_t lwgsm_sapbr_set_param(uint8_t cid, const char* tag, const char* value, const lwgsm_api_cmd_evt_fn evt_fn,
+                               void* const evt_arg, const uint32_t blocking);
+
+lwgsmr_t lwgsm_sapbr(uint8_t cid, lwgsm_sapbr_cmd_type_t cmd_type, const lwgsm_api_cmd_evt_fn evt_fn, void* const evt_arg,
+                     const uint32_t blocking);
 
 /**
  * \}

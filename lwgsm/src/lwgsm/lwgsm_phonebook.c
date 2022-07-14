@@ -38,7 +38,10 @@
 #if LWGSM_CFG_PHONEBOOK || __DOXYGEN__
 
 #if !__DOXYGEN__
-#define CHECK_ENABLED()                 if (!(check_enabled() == lwgsmOK)) { return lwgsmERRNOTENABLED; }
+#define CHECK_ENABLED()                                                                                                          \
+    if (!(check_enabled() == lwgsmOK)) {                                                                                           \
+        return lwgsmERRNOTENABLED;                                                                                                   \
+    }
 #endif /* !__DOXYGEN__ */
 
 /**
@@ -64,8 +67,7 @@ static lwgsmr_t
 check_mem(lwgsm_mem_t mem, uint8_t can_curr) {
     lwgsmr_t res = lwgsmERRMEM;
     lwgsm_core_lock();
-    if ((mem < LWGSM_MEM_END && lwgsm.m.pb.mem.mem_available & (1 << (uint32_t)mem)) ||
-        (can_curr && mem == LWGSM_MEM_CURRENT)) {
+    if ((mem < LWGSM_MEM_END && lwgsm.m.pb.mem.mem_available & (1 << (uint32_t)mem)) || (can_curr && mem == LWGSM_MEM_CURRENT)) {
         res = lwgsmOK;
     }
     lwgsm_core_unlock();
@@ -127,16 +129,16 @@ lwgsm_pb_add(lwgsm_mem_t mem, const char* name, const char* num, lwgsm_number_ty
 
     LWGSM_ASSERT("name != NULL", name != NULL);
     LWGSM_ASSERT("num != NULL", num != NULL);
-    CHECK_ENABLED();                            /* Check if enabled */
+    CHECK_ENABLED(); /* Check if enabled */
     LWGSM_ASSERT("check_mem() == lwgsmOK", check_mem(mem, 1) == lwgsmOK);
 
     LWGSM_MSG_VAR_ALLOC(msg, blocking);
     LWGSM_MSG_VAR_SET_EVT(msg, evt_fn, evt_arg);
     LWGSM_MSG_VAR_REF(msg).cmd_def = LWGSM_CMD_CPBW_SET;
-    if (mem == LWGSM_MEM_CURRENT) {             /* Should be always false */
-        LWGSM_MSG_VAR_REF(msg).cmd = LWGSM_CMD_CPBS_GET;/* First get memory */
+    if (mem == LWGSM_MEM_CURRENT) {                    /* Should be always false */
+        LWGSM_MSG_VAR_REF(msg).cmd = LWGSM_CMD_CPBS_GET; /* First get memory */
     } else {
-        LWGSM_MSG_VAR_REF(msg).cmd = LWGSM_CMD_CPBS_SET;/* First set memory */
+        LWGSM_MSG_VAR_REF(msg).cmd = LWGSM_CMD_CPBS_SET; /* First set memory */
     }
 
     LWGSM_MSG_VAR_REF(msg).msg.pb_write.pos = 0;
@@ -159,8 +161,8 @@ lwgsm_pb_add(lwgsm_mem_t mem, const char* name, const char* num, lwgsm_number_ty
  * \return          \ref lwgsmOK on success, member of \ref lwgsmr_t otherwise
  */
 lwgsmr_t
-lwgsm_pb_read(lwgsm_mem_t mem, size_t pos, lwgsm_pb_entry_t* entry,
-              const lwgsm_api_cmd_evt_fn evt_fn, void* const evt_arg, const uint32_t blocking) {
+lwgsm_pb_read(lwgsm_mem_t mem, size_t pos, lwgsm_pb_entry_t* entry, const lwgsm_api_cmd_evt_fn evt_fn,
+              void* const evt_arg, const uint32_t blocking) {
     return lwgsm_pb_list(mem, pos, entry, 1, NULL, evt_fn, evt_arg, blocking);
 }
 
@@ -183,16 +185,16 @@ lwgsm_pb_edit(lwgsm_mem_t mem, size_t pos, const char* name, const char* num, lw
 
     LWGSM_ASSERT("name != NULL", name != NULL);
     LWGSM_ASSERT("num != NULL", num != NULL);
-    CHECK_ENABLED();                            /* Check if enabled */
+    CHECK_ENABLED(); /* Check if enabled */
     LWGSM_ASSERT("check_mem() == mem", check_mem(mem, 1) == lwgsmOK);
 
     LWGSM_MSG_VAR_ALLOC(msg, blocking);
     LWGSM_MSG_VAR_SET_EVT(msg, evt_fn, evt_arg);
     LWGSM_MSG_VAR_REF(msg).cmd_def = LWGSM_CMD_CPBW_SET;
-    if (mem == LWGSM_MEM_CURRENT) {             /* Should be always false */
-        LWGSM_MSG_VAR_REF(msg).cmd = LWGSM_CMD_CPBS_GET;/* First get memory */
+    if (mem == LWGSM_MEM_CURRENT) {                    /* Should be always false */
+        LWGSM_MSG_VAR_REF(msg).cmd = LWGSM_CMD_CPBS_GET; /* First get memory */
     } else {
-        LWGSM_MSG_VAR_REF(msg).cmd = LWGSM_CMD_CPBS_SET;/* First set memory */
+        LWGSM_MSG_VAR_REF(msg).cmd = LWGSM_CMD_CPBS_SET; /* First set memory */
     }
 
     LWGSM_MSG_VAR_REF(msg).msg.pb_write.pos = pos;
@@ -214,21 +216,21 @@ lwgsm_pb_edit(lwgsm_mem_t mem, size_t pos, const char* name, const char* num, lw
  * \return          \ref lwgsmOK on success, member of \ref lwgsmr_t otherwise
  */
 lwgsmr_t
-lwgsm_pb_delete(lwgsm_mem_t mem, size_t pos,
-                const lwgsm_api_cmd_evt_fn evt_fn, void* const evt_arg, const uint32_t blocking) {
+lwgsm_pb_delete(lwgsm_mem_t mem, size_t pos, const lwgsm_api_cmd_evt_fn evt_fn, void* const evt_arg,
+                const uint32_t blocking) {
     LWGSM_MSG_VAR_DEFINE(msg);
 
     LWGSM_ASSERT("pos > 0", pos > 0);
-    CHECK_ENABLED();                            /* Check if enabled */
+    CHECK_ENABLED(); /* Check if enabled */
     LWGSM_ASSERT("check_mem() == lwgsmOK", check_mem(mem, 1) == lwgsmOK);
 
     LWGSM_MSG_VAR_ALLOC(msg, blocking);
     LWGSM_MSG_VAR_SET_EVT(msg, evt_fn, evt_arg);
     LWGSM_MSG_VAR_REF(msg).cmd_def = LWGSM_CMD_CPBW_SET;
-    if (mem == LWGSM_MEM_CURRENT) {             /* Should be always false */
-        LWGSM_MSG_VAR_REF(msg).cmd = LWGSM_CMD_CPBS_GET;/* First get memory */
+    if (mem == LWGSM_MEM_CURRENT) {                    /* Should be always false */
+        LWGSM_MSG_VAR_REF(msg).cmd = LWGSM_CMD_CPBS_GET; /* First get memory */
     } else {
-        LWGSM_MSG_VAR_REF(msg).cmd = LWGSM_CMD_CPBS_SET;/* First set memory */
+        LWGSM_MSG_VAR_REF(msg).cmd = LWGSM_CMD_CPBS_SET; /* First set memory */
     }
 
     LWGSM_MSG_VAR_REF(msg).msg.pb_write.mem = mem;
@@ -267,12 +269,12 @@ lwgsm_pb_list(lwgsm_mem_t mem, size_t start_index, lwgsm_pb_entry_t* entries, si
     if (er != NULL) {
         *er = 0;
     }
-    LWGSM_MEMSET(entries, 0x00, sizeof(*entries) * etr);/* Reset data structure */
+    LWGSM_MEMSET(entries, 0x00, sizeof(*entries) * etr); /* Reset data structure */
     LWGSM_MSG_VAR_REF(msg).cmd_def = LWGSM_CMD_CPBR;
-    if (mem == LWGSM_MEM_CURRENT) {             /* Should be always false */
-        LWGSM_MSG_VAR_REF(msg).cmd = LWGSM_CMD_CPBS_GET;/* First get memory */
+    if (mem == LWGSM_MEM_CURRENT) {                    /* Should be always false */
+        LWGSM_MSG_VAR_REF(msg).cmd = LWGSM_CMD_CPBS_GET; /* First get memory */
     } else {
-        LWGSM_MSG_VAR_REF(msg).cmd = LWGSM_CMD_CPBS_SET;/* First set memory */
+        LWGSM_MSG_VAR_REF(msg).cmd = LWGSM_CMD_CPBS_SET; /* First set memory */
     }
 
     LWGSM_MSG_VAR_REF(msg).msg.pb_list.mem = mem;
@@ -305,7 +307,7 @@ lwgsm_pb_search(lwgsm_mem_t mem, const char* search, lwgsm_pb_entry_t* entries, 
     LWGSM_ASSERT("search != NULL", search != NULL);
     LWGSM_ASSERT("entries != NULL", entries != NULL);
     LWGSM_ASSERT("etr > 0", etr > 0);
-    CHECK_ENABLED();                            /* Check if enabled */
+    CHECK_ENABLED(); /* Check if enabled */
     LWGSM_ASSERT("check_mem() == mem", check_mem(mem, 1) == lwgsmOK);
 
     LWGSM_MSG_VAR_ALLOC(msg, blocking);
@@ -314,12 +316,12 @@ lwgsm_pb_search(lwgsm_mem_t mem, const char* search, lwgsm_pb_entry_t* entries, 
     if (er != NULL) {
         *er = 0;
     }
-    LWGSM_MEMSET(entries, 0x00, sizeof(*entries) * etr);/* Reset data structure */
+    LWGSM_MEMSET(entries, 0x00, sizeof(*entries) * etr); /* Reset data structure */
     LWGSM_MSG_VAR_REF(msg).cmd_def = LWGSM_CMD_CPBF;
-    if (mem == LWGSM_MEM_CURRENT) {             /* Should be always false */
-        LWGSM_MSG_VAR_REF(msg).cmd = LWGSM_CMD_CPBS_GET;/* First get memory */
+    if (mem == LWGSM_MEM_CURRENT) {                    /* Should be always false */
+        LWGSM_MSG_VAR_REF(msg).cmd = LWGSM_CMD_CPBS_GET; /* First get memory */
     } else {
-        LWGSM_MSG_VAR_REF(msg).cmd = LWGSM_CMD_CPBS_SET;/* First set memory */
+        LWGSM_MSG_VAR_REF(msg).cmd = LWGSM_CMD_CPBS_SET; /* First set memory */
     }
 
     LWGSM_MSG_VAR_REF(msg).msg.pb_search.mem = mem;

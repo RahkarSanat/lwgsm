@@ -50,7 +50,7 @@ netconn_client_thread(void const* arg) {
          */
         if ((res = lwgsm_netconn_connect(client, NETCONN_HOST, NETCONN_PORT)) == lwgsmOK) {
             printf("Connected to " NETCONN_HOST "\r\n");
-            
+
             /* Send data to server */
             if ((res = lwgsm_netconn_write(client, request_header, sizeof(request_header) - 1)) == lwgsmOK) {
                 res = lwgsm_netconn_flush(client);/* Flush data to output */

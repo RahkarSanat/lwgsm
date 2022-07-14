@@ -1,6 +1,6 @@
 /**
- * \file            lwgsm_models.h
- * \brief           Supported GSM devices
+ * \file            lwgsm_gnss.h
+ * \brief           GNSS API
  */
 
 /*
@@ -31,11 +31,37 @@
  * Author:          Tilen MAJERLE <tilen@majerle.eu>
  * Version:         v0.1.1
  */
+#ifndef LWGSM_HDR_GNSS_H
+#define LWGSM_HDR_GNSS_H
 
-/* Order: Device name; Device model identification, Is_2G, Is_LTE */
-LWGSM_DEVICE_MODEL_ENTRY(SIM800x, "SIM800", 1, 0)
-LWGSM_DEVICE_MODEL_ENTRY(SIM900x, "SIM900", 1, 0)
-// LWGSM_DEVICE_MODEL_ENTRY(SIM7000x, "SIM7000", 1, 0)
-// LWGSM_DEVICE_MODEL_ENTRY(SIM7020x, "SIM7020", 1, 0)
+#include "lwgsm/lwgsm.h"
 
-#undef LWGSM_DEVICE_MODEL_ENTRY
+#ifdef __cplusplus
+extern "C" {
+#endif /* __cplusplus */
+
+/**
+ * \ingroup         LWGSM
+ * \defgroup        LWGSM_GNSS Global navigation satellite system
+ * \brief           Global navigation satellite system (GNSS) manager
+ *
+ *
+ * \{
+ */
+
+lwgsmr_t lwgsm_gnss_power_on(const uint32_t baudrate, const lwgsm_api_cmd_evt_fn evt_fn, void* const evt_arg,
+                             const uint32_t blocking);
+lwgsmr_t lwgsm_gnss_ipr_set(const uint32_t baudrate, const lwgsm_api_cmd_evt_fn evt_fn, void* const evt_arg,
+                            const uint32_t blocking);
+lwgsmr_t lwgsm_gnss_get_info(const lwgsm_api_cmd_evt_fn evt_fn, void* const evt_arg, const uint32_t blocking);
+lwgsmr_t lwgsm_gnss_set_urc(const uint8_t interval, const lwgsm_api_cmd_evt_fn evt_fn, void* const evt_arg,
+                            const uint32_t blocking);
+
+/**
+ * \}
+ */
+#ifdef __cplusplus
+}
+#endif /* __cplusplus */
+
+#endif /* LWGSM_HDR_GNSS_H */
