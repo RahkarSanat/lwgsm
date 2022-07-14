@@ -259,7 +259,7 @@ configure_uart(uint32_t baudrate) {
  */
 static uint8_t
 reset_device(uint8_t state) {
-    if (state) { /* Activate reset line */
+    if (state) {                                /* Activate reset line */
         LL_GPIO_ResetOutputPin(LWGSM_RESET_PORT, LWGSM_RESET_PIN);
     } else {
         LL_GPIO_SetOutputPin(LWGSM_RESET_PORT, LWGSM_RESET_PIN);
@@ -300,18 +300,18 @@ lwgsm_ll_init(lwgsm_ll_t* ll) {
     lwgsm_mem_region_t mem_regions[] = {{memory, sizeof(memory)}};
 
     if (!initialized) {
-        lwgsm_mem_assignmemory(mem_regions, LWGSM_ARRAYSIZE(mem_regions)); /* Assign memory for allocations */
+        lwgsm_mem_assignmemory(mem_regions, LWGSM_ARRAYSIZE(mem_regions));  /* Assign memory for allocations */
     }
 #endif /* !LWGSM_CFG_MEM_CUSTOM */
 
     if (!initialized) {
-        ll->send_fn = send_data; /* Set callback function to send data */
+        ll->send_fn = send_data;                /* Set callback function to send data */
 #if defined(LWGSM_RESET_PIN)
-        ll->reset_fn = reset_device; /* Set callback for hardware reset */
+        ll->reset_fn = reset_device;            /* Set callback for hardware reset */
 #endif                           /* defined(LWGSM_RESET_PIN) */
     }
 
-    configure_uart(ll->uart.baudrate); /* Initialize UART for communication */
+    configure_uart(ll->uart.baudrate);          /* Initialize UART for communication */
     initialized = 1;
     return lwgsmOK;
 }

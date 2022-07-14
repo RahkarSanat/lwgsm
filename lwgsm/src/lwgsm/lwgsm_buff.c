@@ -59,13 +59,13 @@ uint8_t BUF_PREF(buff_init)(BUF_PREF(buff_t) * buff, size_t size) {
     }
     BUF_MEMSET(buff, 0, sizeof(*buff));
 
-    buff->size = size;                                         /* Set default values */
-    buff->buff = lwgsm_mem_malloc(sizeof(*buff->buff) * size); /* Allocate memory for buffer */
+    buff->size = size;                          /* Set default values */
+    buff->buff = lwgsm_mem_malloc(sizeof(*buff->buff) * size);  /* Allocate memory for buffer */
 
-    if (buff->buff == NULL) { /* Check allocation */
+    if (buff->buff == NULL) {                   /* Check allocation */
         return 0;
     }
-    return 1; /* Initialized OK */
+    return 1;                                   /* Initialized OK */
 }
 
 /**
@@ -327,9 +327,9 @@ size_t BUF_PREF(buff_skip)(BUF_PREF(buff_t) * buff, size_t len) {
         return 0;
     }
 
-    full = BUF_PREF(buff_get_full)(buff); /* Get buffer used length */
-    buff->r += BUF_MIN(len, full);        /* Advance read pointer */
-    if (buff->r >= buff->size) {          /* Subtract possible overflow */
+    full = BUF_PREF(buff_get_full)(buff);       /* Get buffer used length */
+    buff->r += BUF_MIN(len, full);              /* Advance read pointer */
+    if (buff->r >= buff->size) {                /* Subtract possible overflow */
         buff->r -= buff->size;
     }
     return len;
@@ -399,9 +399,9 @@ size_t BUF_PREF(buff_advance)(BUF_PREF(buff_t) * buff, size_t len) {
         return 0;
     }
 
-    free = BUF_PREF(buff_get_free)(buff); /* Get buffer free length */
-    buff->w += BUF_MIN(len, free);        /* Advance write pointer */
-    if (buff->w >= buff->size) {          /* Subtract possible overflow */
+    free = BUF_PREF(buff_get_free)(buff);       /* Get buffer free length */
+    buff->w += BUF_MIN(len, free);              /* Advance write pointer */
+    if (buff->w >= buff->size) {                /* Subtract possible overflow */
         buff->w -= buff->size;
     }
     return len;

@@ -53,8 +53,8 @@ extern "C" {
  * \brief           Single memory region descriptor
  */
 typedef struct {
-    void* start_addr; /*!< Start address of region */
-    size_t size;      /*!< Size in units of bytes of region */
+    void* start_addr;                           /*!< Start address of region */
+    size_t size;                                /*!< Size in units of bytes of region */
 } lwgsm_mem_region_t;
 
 uint8_t lwgsm_mem_assignmemory(const lwgsm_mem_region_t* regions, size_t size);

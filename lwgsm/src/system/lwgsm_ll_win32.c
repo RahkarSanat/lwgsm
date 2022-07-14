@@ -40,8 +40,8 @@
 
 static uint8_t initialized = 0;
 static HANDLE thread_handle;
-static volatile HANDLE com_port;    /*!< COM port handle */
-static uint8_t data_buffer[0x1000]; /*!< Received data array */
+static volatile HANDLE com_port;                /*!< COM port handle */
+static uint8_t data_buffer[0x1000];             /*!< Received data array */
 
 static void uart_thread(void* param);
 
@@ -146,13 +146,13 @@ uart_thread(void* param) {
     lwgsm_sys_sem_t sem;
     FILE* file = NULL;
 
-    lwgsm_sys_sem_create(&sem, 0); /* Create semaphore for delay functions */
+    lwgsm_sys_sem_create(&sem, 0);              /* Create semaphore for delay functions */
 
     while (com_port == NULL) {
-        lwgsm_sys_sem_wait(&sem, 1); /* Add some delay with yield */
+        lwgsm_sys_sem_wait(&sem, 1);            /* Add some delay with yield */
     }
 
-    fopen_s(&file, "log_file.txt", "w+"); /* Open debug file in write mode */
+    fopen_s(&file, "log_file.txt", "w+");       /* Open debug file in write mode */
     while (1) {
         /*
          * Try to read data from COM port
@@ -205,7 +205,7 @@ lwgsmr_t
 lwgsm_ll_init(lwgsm_ll_t* ll) {
 #if !LWGSM_CFG_MEM_CUSTOM
     /* Step 1: Configure memory for dynamic allocations */
-    static uint8_t memory[0x10000]; /* Create memory for dynamic allocations with specific size */
+    static uint8_t memory[0x10000];             /* Create memory for dynamic allocations with specific size */
 
     /*
      * Create memory region(s) of memory.
@@ -214,17 +214,17 @@ lwgsm_ll_init(lwgsm_ll_t* ll) {
      */
     lwgsm_mem_region_t mem_regions[] = {{memory, sizeof(memory)}};
     if (!initialized) {
-        lwgsm_mem_assignmemory(mem_regions, LWGSM_ARRAYSIZE(mem_regions)); /* Assign memory for allocations to GSM library */
+        lwgsm_mem_assignmemory(mem_regions, LWGSM_ARRAYSIZE(mem_regions));  /* Assign memory for allocations to GSM library */
     }
 #endif /* !LWGSM_CFG_MEM_CUSTOM */
 
     /* Step 2: Set AT port send function to use when we have data to transmit */
     if (!initialized) {
-        ll->send_fn = send_data; /* Set callback function to send data */
+        ll->send_fn = send_data;                /* Set callback function to send data */
     }
 
     /* Step 3: Configure AT port to be able to send/receive data to/from GSM device */
-    if (!configure_uart(ll->uart.baudrate)) { /* Initialize UART for communication */
+    if (!configure_uart(ll->uart.baudrate)) {   /* Initialize UART for communication */
         return lwgsmERR;
     }
     initialized = 1;

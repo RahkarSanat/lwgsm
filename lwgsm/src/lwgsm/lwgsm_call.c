@@ -120,7 +120,7 @@ lwgsm_call_start(const char* number, const lwgsm_api_cmd_evt_fn evt_fn, void* co
     LWGSM_MSG_VAR_DEFINE(msg);
 
     LWGSM_ASSERT("number != NULL", number != NULL);
-    CHECK_ENABLED(); /* Check if enabled */
+    CHECK_ENABLED();                            /* Check if enabled */
     LWGSM_ASSERT("check_ready == lwgsmOK", check_ready() == lwgsmOK);
 
     LWGSM_MSG_VAR_ALLOC(msg, blocking);

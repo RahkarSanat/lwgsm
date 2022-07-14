@@ -37,9 +37,9 @@
 
 #if LWGSM_CFG_SMS || __DOXYGEN__
 
-#define LWGSM_SMS_OPERATION_IDX 0 /*!< Operation index for memory array (read, delete, list) */
-#define LWGSM_SMS_SEND_IDX 1      /*!< Send index for memory array */
-#define LWGSM_SMS_RECEIVE_IDX 2   /*!< Receive index for memory array */
+#define LWGSM_SMS_OPERATION_IDX 0               /*!< Operation index for memory array (read, delete, list) */
+#define LWGSM_SMS_SEND_IDX 1                    /*!< Send index for memory array */
+#define LWGSM_SMS_RECEIVE_IDX 2                 /*!< Receive index for memory array */
 
 #if !__DOXYGEN__
 #define CHECK_ENABLED()                                                                                                          \
@@ -150,8 +150,8 @@ lwgsm_sms_send(const char* num, const char* text, const lwgsm_api_cmd_evt_fn evt
 
     LWGSM_ASSERT("num != NULL && num[0] > 0", num != NULL && num[0] > 0);
     LWGSM_ASSERT("text != NULL && text[0] > 0 && strlen(text) <= 160", text != NULL && text[0] > 0 && strlen(text) <= 160);
-    CHECK_ENABLED(); /* Check if enabled */
-    CHECK_READY();   /* Check if ready */
+    CHECK_ENABLED();                            /* Check if enabled */
+    CHECK_READY();                              /* Check if ready */
 
     LWGSM_MSG_VAR_ALLOC(msg, blocking);
     LWGSM_MSG_VAR_SET_EVT(msg, evt_fn, evt_arg);
@@ -181,22 +181,22 @@ lwgsm_sms_read(lwgsm_mem_t mem, size_t pos, lwgsm_sms_entry_t* entry, uint8_t up
     LWGSM_MSG_VAR_DEFINE(msg);
 
     LWGSM_ASSERT("entry != NULL", entry != NULL);
-    CHECK_ENABLED(); /* Check if enabled */
-    CHECK_READY();   /* Check if ready */
+    CHECK_ENABLED();                            /* Check if enabled */
+    CHECK_READY();                              /* Check if ready */
     LWGSM_ASSERT("check_sms_mem() == lwgsmOK", check_sms_mem(mem, 1) == lwgsmOK);
 
     LWGSM_MSG_VAR_ALLOC(msg, blocking);
     LWGSM_MSG_VAR_SET_EVT(msg, evt_fn, evt_arg);
 
-    LWGSM_MEMSET(entry, 0x00, sizeof(*entry)); /* Reset data structure */
+    LWGSM_MEMSET(entry, 0x00, sizeof(*entry));  /* Reset data structure */
 
-    entry->mem = mem; /* Set memory */
-    entry->pos = pos; /* Set device position */
+    entry->mem = mem;                           /* Set memory */
+    entry->pos = pos;                           /* Set device position */
     LWGSM_MSG_VAR_REF(msg).cmd_def = LWGSM_CMD_CMGR;
-    if (mem == LWGSM_MEM_CURRENT) {                    /* Should be always false */
-        LWGSM_MSG_VAR_REF(msg).cmd = LWGSM_CMD_CPMS_GET; /* First get memory */
+    if (mem == LWGSM_MEM_CURRENT) {             /* Should be always false */
+        LWGSM_MSG_VAR_REF(msg).cmd = LWGSM_CMD_CPMS_GET;/* First get memory */
     } else {
-        LWGSM_MSG_VAR_REF(msg).cmd = LWGSM_CMD_CPMS_SET; /* First set memory */
+        LWGSM_MSG_VAR_REF(msg).cmd = LWGSM_CMD_CPMS_SET;/* First set memory */
     }
     LWGSM_MSG_VAR_REF(msg).msg.sms_read.mem = mem;
     LWGSM_MSG_VAR_REF(msg).msg.sms_read.pos = pos;
@@ -221,17 +221,17 @@ lwgsm_sms_delete(lwgsm_mem_t mem, size_t pos, const lwgsm_api_cmd_evt_fn evt_fn,
                  const uint32_t blocking) {
     LWGSM_MSG_VAR_DEFINE(msg);
 
-    CHECK_ENABLED(); /* Check if enabled */
-    CHECK_READY();   /* Check if ready */
+    CHECK_ENABLED();                            /* Check if enabled */
+    CHECK_READY();                              /* Check if ready */
     LWGSM_ASSERT("check_sms_mem() == lwgsmOK", check_sms_mem(mem, 1) == lwgsmOK);
 
     LWGSM_MSG_VAR_ALLOC(msg, blocking);
     LWGSM_MSG_VAR_SET_EVT(msg, evt_fn, evt_arg);
     LWGSM_MSG_VAR_REF(msg).cmd_def = LWGSM_CMD_CMGD;
-    if (mem == LWGSM_MEM_CURRENT) {                    /* Should be always false */
-        LWGSM_MSG_VAR_REF(msg).cmd = LWGSM_CMD_CPMS_GET; /* First get memory */
+    if (mem == LWGSM_MEM_CURRENT) {             /* Should be always false */
+        LWGSM_MSG_VAR_REF(msg).cmd = LWGSM_CMD_CPMS_GET;/* First get memory */
     } else {
-        LWGSM_MSG_VAR_REF(msg).cmd = LWGSM_CMD_CPMS_SET; /* First set memory */
+        LWGSM_MSG_VAR_REF(msg).cmd = LWGSM_CMD_CPMS_SET;/* First set memory */
     }
     LWGSM_MSG_VAR_REF(msg).msg.sms_delete.mem = mem;
     LWGSM_MSG_VAR_REF(msg).msg.sms_delete.pos = pos;
@@ -252,13 +252,13 @@ lwgsm_sms_delete_all(lwgsm_sms_status_t status, const lwgsm_api_cmd_evt_fn evt_f
                      const uint32_t blocking) {
     LWGSM_MSG_VAR_DEFINE(msg);
 
-    CHECK_ENABLED(); /* Check if enabled */
-    CHECK_READY();   /* Check if ready */
+    CHECK_ENABLED();                            /* Check if enabled */
+    CHECK_READY();                              /* Check if ready */
 
     LWGSM_MSG_VAR_ALLOC(msg, blocking);
     LWGSM_MSG_VAR_SET_EVT(msg, evt_fn, evt_arg);
     LWGSM_MSG_VAR_REF(msg).cmd_def = LWGSM_CMD_CMGDA;
-    LWGSM_MSG_VAR_REF(msg).cmd = LWGSM_CMD_CMGF; /* By default format = 1 */
+    LWGSM_MSG_VAR_REF(msg).cmd = LWGSM_CMD_CMGF;/* By default format = 1 */
     LWGSM_MSG_VAR_REF(msg).msg.sms_delete_all.status = status;
 
     /* This command may take a while */
@@ -285,8 +285,8 @@ lwgsm_sms_list(lwgsm_mem_t mem, lwgsm_sms_status_t stat, lwgsm_sms_entry_t* entr
 
     LWGSM_ASSERT("entires != NULL", entries != NULL);
     LWGSM_ASSERT("etr > 0", etr > 0);
-    CHECK_ENABLED(); /* Check if enabled */
-    CHECK_READY();   /* Check if ready */
+    CHECK_ENABLED();                            /* Check if enabled */
+    CHECK_READY();                              /* Check if ready */
     LWGSM_ASSERT("check_sms_mem() == lwgsmOK", check_sms_mem(mem, 1) == lwgsmOK);
 
     LWGSM_MSG_VAR_ALLOC(msg, blocking);
@@ -295,12 +295,12 @@ lwgsm_sms_list(lwgsm_mem_t mem, lwgsm_sms_status_t stat, lwgsm_sms_entry_t* entr
     if (er != NULL) {
         *er = 0;
     }
-    LWGSM_MEMSET(entries, 0x00, sizeof(*entries) * etr); /* Reset data structure */
+    LWGSM_MEMSET(entries, 0x00, sizeof(*entries) * etr);/* Reset data structure */
     LWGSM_MSG_VAR_REF(msg).cmd_def = LWGSM_CMD_CMGL;
-    if (mem == LWGSM_MEM_CURRENT) {                    /* Should be always false */
-        LWGSM_MSG_VAR_REF(msg).cmd = LWGSM_CMD_CPMS_GET; /* First get memory */
+    if (mem == LWGSM_MEM_CURRENT) {             /* Should be always false */
+        LWGSM_MSG_VAR_REF(msg).cmd = LWGSM_CMD_CPMS_GET;/* First get memory */
     } else {
-        LWGSM_MSG_VAR_REF(msg).cmd = LWGSM_CMD_CPMS_SET; /* First set memory */
+        LWGSM_MSG_VAR_REF(msg).cmd = LWGSM_CMD_CPMS_SET;/* First set memory */
     }
     LWGSM_MSG_VAR_REF(msg).msg.sms_list.mem = mem;
     LWGSM_MSG_VAR_REF(msg).msg.sms_list.status = stat;
@@ -328,8 +328,8 @@ lwgsm_sms_set_preferred_storage(lwgsm_mem_t mem1, lwgsm_mem_t mem2, lwgsm_mem_t 
                                 void* const evt_arg, const uint32_t blocking) {
     LWGSM_MSG_VAR_DEFINE(msg);
 
-    CHECK_ENABLED(); /* Check if enabled */
-    CHECK_READY();   /* Check if ready */
+    CHECK_ENABLED();                            /* Check if enabled */
+    CHECK_READY();                              /* Check if ready */
     LWGSM_ASSERT("check_sms_mem(1) == lwgsmOK", check_sms_mem(mem1, 1) == lwgsmOK);
     LWGSM_ASSERT("check_sms_mem(2) == lwgsmOK", check_sms_mem(mem2, 1) == lwgsmOK);
     LWGSM_ASSERT("check_sms_mem(3) == lwgsmOK", check_sms_mem(mem3, 1) == lwgsmOK);

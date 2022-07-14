@@ -51,25 +51,25 @@ extern "C" {
  * \brief           List of possible messages
  */
 typedef enum {
-    LWGSM_CMD_IDLE = 0, /*!< IDLE mode */
+    LWGSM_CMD_IDLE = 0,                         /*!< IDLE mode */
 
     /* Basic AT commands */
-    LWGSM_CMD_RESET,                  /*!< Reset device */
-    LWGSM_CMD_RESET_DEVICE_FIRST_CMD, /*!< Reset device first driver specific command */
-    LWGSM_CMD_ATE0,                   /*!< Disable ECHO mode on AT commands */
-    LWGSM_CMD_ATE1,                   /*!< Enable ECHO mode on AT commands */
-    LWGSM_CMD_GSLP,                   /*!< Set GSM to sleep mode */
-    LWGSM_CMD_RESTORE,                /*!< Restore GSM internal settings to default values */
+    LWGSM_CMD_RESET,                            /*!< Reset device */
+    LWGSM_CMD_RESET_DEVICE_FIRST_CMD,           /*!< Reset device first driver specific command */
+    LWGSM_CMD_ATE0,                             /*!< Disable ECHO mode on AT commands */
+    LWGSM_CMD_ATE1,                             /*!< Enable ECHO mode on AT commands */
+    LWGSM_CMD_GSLP,                             /*!< Set GSM to sleep mode */
+    LWGSM_CMD_RESTORE,                          /*!< Restore GSM internal settings to default values */
     // AMIN
-    LWGSM_CMD_UART,                   /*!< Set GSM UART baudrate */
+    LWGSM_CMD_UART,                             /*!< Set GSM UART baudrate */
     LWGSM_CMD_SAVE_STATE,
     // AMIN
     LWGSM_CMD_CGACT_SET_0,
     LWGSM_CMD_CGACT_SET_1,
     LWGSM_CMD_CGATT_SET_0,
     LWGSM_CMD_CGATT_SET_1,
-    LWGSM_CMD_NETWORK_ATTACH, /*!< Attach to a network */
-    LWGSM_CMD_NETWORK_DETACH, /*!< Detach from network */
+    LWGSM_CMD_NETWORK_ATTACH,                   /*!< Attach to a network */
+    LWGSM_CMD_NETWORK_DETACH,                   /*!< Detach from network */
 
     LWGSM_CMD_CIPMUX_SET,
     LWGSM_CMD_CIPRXGET_SET,
@@ -77,242 +77,242 @@ typedef enum {
 
     /* AT commands according to the V.25TER */
     LWGSM_CMD_CALL_ENABLE,
-    LWGSM_CMD_A,       /*!< Re-issues the Last Command Given */
-    LWGSM_CMD_ATA,     /*!< Answer an Incoming Call */
-    LWGSM_CMD_ATD,     /*!< Mobile Originated Call to Dial A Number */
-    LWGSM_CMD_ATD_N,   /*!< Originate Call to Phone Number in Current Memory: ATD<n> */
-    LWGSM_CMD_ATD_STR, /*!< Originate Call to Phone Number in Memory Which Corresponds to Field "str": ATD>str */
-    LWGSM_CMD_ATDL,    /*!< Redial Last Telephone Number Used */
-    LWGSM_CMD_ATE,     /*!< Set Command Echo Mode */
-    LWGSM_CMD_ATH,     /*!< Disconnect Existing */
-    LWGSM_CMD_ATI,     /*!< Display Product Identification Information */
-    LWGSM_CMD_ATL,     /*!< Set Monitor speaker */
-    LWGSM_CMD_ATM,     /*!< Set Monitor Speaker Mode */
-    LWGSM_CMD_PPP,     /*!< Switch from Data Mode or PPP Online Mode to Command Mode, "+++" originally */
-    LWGSM_CMD_ATO,     /*!< Switch from Command Mode to Data Mode */
-    LWGSM_CMD_ATP,     /*!< Select Pulse Dialing */
-    LWGSM_CMD_ATQ,     /*!< Set Result Code Presentation Mode */
-    LWGSM_CMD_ATS0,    /*!< Set Number of Rings before Automatically Answering the Call */
-    LWGSM_CMD_ATS3,    /*!< Set Command Line Termination Character */
-    LWGSM_CMD_ATS4,    /*!< Set Response Formatting Character */
-    LWGSM_CMD_ATS5,    /*!< Set Command Line Editing Character */
-    LWGSM_CMD_ATS6,    /*!< Pause Before Blind */
-    LWGSM_CMD_ATS7,    /*!< Set Number of Seconds to Wait for Connection Completion */
-    LWGSM_CMD_ATS8,    /*!< Set Number of Seconds to Wait for Comma Dial Modifier Encountered in Dial String of D Command */
-    LWGSM_CMD_ATS10,   /*!< Set Disconnect Delay after Indicating the Absence of Data Carrier */
-    LWGSM_CMD_ATT,     /*!< Select Tone Dialing */
-    LWGSM_CMD_ATV,     /*!< TA Response Format */
-    LWGSM_CMD_ATX,     /*!< Set CONNECT Result Code Format and Monitor Call Progress */
-    LWGSM_CMD_ATZ,     /*!< Reset Default Configuration */
-    LWGSM_CMD_AT_C,    /*!< Set DCD Function Mode, AT&C */
-    LWGSM_CMD_AT_D,    /*!< Set DTR Function, AT&D */
-    LWGSM_CMD_AT_F,    /*!< Factory Defined Configuration, AT&F */
-    LWGSM_CMD_AT_V,    /*!< Display Current Configuration, AT&V */
-    LWGSM_CMD_AT_W,    /*!< Store Active Profile, AT&W */
-    LWGSM_CMD_GCAP,    /*!< Request Complete TA Capabilities List */
-    LWGSM_CMD_GMI,     /*!< Request Manufacturer Identification */
-    LWGSM_CMD_GMM,     /*!< Request TA Model Identification */
-    LWGSM_CMD_GMR,     /*!< Request TA Revision Identification of Software Release */
-    LWGSM_CMD_GOI,     /*!< Request Global Object Identification */
-    LWGSM_CMD_GSN,     /*!< Request TA Serial Number Identification (IMEI) */
-    LWGSM_CMD_ICF,     /*!< Set TE-TA Control Character Framing */
-    LWGSM_CMD_IFC,     /*!< Set TE-TA Local Data Flow Control */
-    LWGSM_CMD_IPR,     /*!< Set TE-TA Fixed Local Rate */
-    LWGSM_CMD_HVOIC,   /*!< Disconnect Voice Call Only */
+    LWGSM_CMD_A,                                /*!< Re-issues the Last Command Given */
+    LWGSM_CMD_ATA,                              /*!< Answer an Incoming Call */
+    LWGSM_CMD_ATD,                              /*!< Mobile Originated Call to Dial A Number */
+    LWGSM_CMD_ATD_N,                            /*!< Originate Call to Phone Number in Current Memory: ATD<n> */
+    LWGSM_CMD_ATD_STR,                          /*!< Originate Call to Phone Number in Memory Which Corresponds to Field "str": ATD>str */
+    LWGSM_CMD_ATDL,                             /*!< Redial Last Telephone Number Used */
+    LWGSM_CMD_ATE,                              /*!< Set Command Echo Mode */
+    LWGSM_CMD_ATH,                              /*!< Disconnect Existing */
+    LWGSM_CMD_ATI,                              /*!< Display Product Identification Information */
+    LWGSM_CMD_ATL,                              /*!< Set Monitor speaker */
+    LWGSM_CMD_ATM,                              /*!< Set Monitor Speaker Mode */
+    LWGSM_CMD_PPP,                              /*!< Switch from Data Mode or PPP Online Mode to Command Mode, "+++" originally */
+    LWGSM_CMD_ATO,                              /*!< Switch from Command Mode to Data Mode */
+    LWGSM_CMD_ATP,                              /*!< Select Pulse Dialing */
+    LWGSM_CMD_ATQ,                              /*!< Set Result Code Presentation Mode */
+    LWGSM_CMD_ATS0,                             /*!< Set Number of Rings before Automatically Answering the Call */
+    LWGSM_CMD_ATS3,                             /*!< Set Command Line Termination Character */
+    LWGSM_CMD_ATS4,                             /*!< Set Response Formatting Character */
+    LWGSM_CMD_ATS5,                             /*!< Set Command Line Editing Character */
+    LWGSM_CMD_ATS6,                             /*!< Pause Before Blind */
+    LWGSM_CMD_ATS7,                             /*!< Set Number of Seconds to Wait for Connection Completion */
+    LWGSM_CMD_ATS8,                             /*!< Set Number of Seconds to Wait for Comma Dial Modifier Encountered in Dial String of D Command */
+    LWGSM_CMD_ATS10,                            /*!< Set Disconnect Delay after Indicating the Absence of Data Carrier */
+    LWGSM_CMD_ATT,                              /*!< Select Tone Dialing */
+    LWGSM_CMD_ATV,                              /*!< TA Response Format */
+    LWGSM_CMD_ATX,                              /*!< Set CONNECT Result Code Format and Monitor Call Progress */
+    LWGSM_CMD_ATZ,                              /*!< Reset Default Configuration */
+    LWGSM_CMD_AT_C,                             /*!< Set DCD Function Mode, AT&C */
+    LWGSM_CMD_AT_D,                             /*!< Set DTR Function, AT&D */
+    LWGSM_CMD_AT_F,                             /*!< Factory Defined Configuration, AT&F */
+    LWGSM_CMD_AT_V,                             /*!< Display Current Configuration, AT&V */
+    LWGSM_CMD_AT_W,                             /*!< Store Active Profile, AT&W */
+    LWGSM_CMD_GCAP,                             /*!< Request Complete TA Capabilities List */
+    LWGSM_CMD_GMI,                              /*!< Request Manufacturer Identification */
+    LWGSM_CMD_GMM,                              /*!< Request TA Model Identification */
+    LWGSM_CMD_GMR,                              /*!< Request TA Revision Identification of Software Release */
+    LWGSM_CMD_GOI,                              /*!< Request Global Object Identification */
+    LWGSM_CMD_GSN,                              /*!< Request TA Serial Number Identification (IMEI) */
+    LWGSM_CMD_ICF,                              /*!< Set TE-TA Control Character Framing */
+    LWGSM_CMD_IFC,                              /*!< Set TE-TA Local Data Flow Control */
+    LWGSM_CMD_IPR,                              /*!< Set TE-TA Fixed Local Rate */
+    LWGSM_CMD_HVOIC,                            /*!< Disconnect Voice Call Only */
 
     /* AT commands according to 3GPP TS 27.007 */
-    LWGSM_CMD_COPS_SET,     /*!< Set operator */
-    LWGSM_CMD_COPS_GET,     /*!< Get current operator */
-    LWGSM_CMD_COPS_GET_OPT, /*!< Get a list of available operators */
-    LWGSM_CMD_CPAS,         /*!< Phone Activity Status */
-    LWGSM_CMD_CGMI_GET,     /*!< Request Manufacturer Identification */
-    LWGSM_CMD_CGMM_GET,     /*!< Request Model Identification */
-    LWGSM_CMD_CGMR_GET,     /*!< Request TA Revision Identification of Software Release */
-    LWGSM_CMD_CGSN_GET,     /*!< Request Product Serial Number Identification (Identical with +GSN) */
+    LWGSM_CMD_COPS_SET,                         /*!< Set operator */
+    LWGSM_CMD_COPS_GET,                         /*!< Get current operator */
+    LWGSM_CMD_COPS_GET_OPT,                     /*!< Get a list of available operators */
+    LWGSM_CMD_CPAS,                             /*!< Phone Activity Status */
+    LWGSM_CMD_CGMI_GET,                         /*!< Request Manufacturer Identification */
+    LWGSM_CMD_CGMM_GET,                         /*!< Request Model Identification */
+    LWGSM_CMD_CGMR_GET,                         /*!< Request TA Revision Identification of Software Release */
+    LWGSM_CMD_CGSN_GET,                         /*!< Request Product Serial Number Identification (Identical with +GSN) */
 
-    LWGSM_CMD_CLCC_SET, /*!< List Current Calls of ME */
-    LWGSM_CMD_CLCK,     /*!< Facility Lock */
+    LWGSM_CMD_CLCC_SET,                         /*!< List Current Calls of ME */
+    LWGSM_CMD_CLCK,                             /*!< Facility Lock */
 
-    LWGSM_CMD_CACM,     /*!< Accumulated Call Meter (ACM) Reset or Query */
-    LWGSM_CMD_CAMM,     /*!< Accumulated Call Meter Maximum (ACM max) Set or Query */
-    LWGSM_CMD_CAOC,     /*!< Advice of Charge */
-    LWGSM_CMD_CBST,     /*!< Select Bearer Service Type */
-    LWGSM_CMD_CCFC,     /*!< Call Forwarding Number and Conditions Control */
-    LWGSM_CMD_CCWA,     /*!< Call Waiting Control */
-    LWGSM_CMD_CEER,     /*!< Extended Error Report  */
-    LWGSM_CMD_CSCS,     /*!< Select TE Character Set */
-    LWGSM_CMD_CSTA,     /*!< Select Type of Address */
-    LWGSM_CMD_CHLD,     /*!< Call Hold and Multiparty */
-    LWGSM_CMD_CIMI,     /*!< Request International Mobile Subscriber Identity */
-    LWGSM_CMD_CLIP,     /*!< Calling Line Identification Presentation */
-    LWGSM_CMD_CLIR,     /*!< Calling Line Identification Restriction */
-    LWGSM_CMD_CMEE_SET, /*!< Report Mobile Equipment Error */
-    LWGSM_CMD_COLP,     /*!< Connected Line Identification Presentation */
+    LWGSM_CMD_CACM,                             /*!< Accumulated Call Meter (ACM) Reset or Query */
+    LWGSM_CMD_CAMM,                             /*!< Accumulated Call Meter Maximum (ACM max) Set or Query */
+    LWGSM_CMD_CAOC,                             /*!< Advice of Charge */
+    LWGSM_CMD_CBST,                             /*!< Select Bearer Service Type */
+    LWGSM_CMD_CCFC,                             /*!< Call Forwarding Number and Conditions Control */
+    LWGSM_CMD_CCWA,                             /*!< Call Waiting Control */
+    LWGSM_CMD_CEER,                             /*!< Extended Error Report  */
+    LWGSM_CMD_CSCS,                             /*!< Select TE Character Set */
+    LWGSM_CMD_CSTA,                             /*!< Select Type of Address */
+    LWGSM_CMD_CHLD,                             /*!< Call Hold and Multiparty */
+    LWGSM_CMD_CIMI,                             /*!< Request International Mobile Subscriber Identity */
+    LWGSM_CMD_CLIP,                             /*!< Calling Line Identification Presentation */
+    LWGSM_CMD_CLIR,                             /*!< Calling Line Identification Restriction */
+    LWGSM_CMD_CMEE_SET,                         /*!< Report Mobile Equipment Error */
+    LWGSM_CMD_COLP,                             /*!< Connected Line Identification Presentation */
 
     LWGSM_CMD_PHONEBOOK_ENABLE,
-    LWGSM_CMD_CPBF,         /*!< Find Phonebook Entries */
-    LWGSM_CMD_CPBR,         /*!< Read Current Phonebook Entries  */
-    LWGSM_CMD_CPBS_SET,     /*!< Select Phonebook Memory Storage */
-    LWGSM_CMD_CPBS_GET,     /*!< Get current Phonebook Memory Storage */
-    LWGSM_CMD_CPBS_GET_OPT, /*!< Get available Phonebook Memory Storages */
-    LWGSM_CMD_CPBW_SET,     /*!< Write Phonebook Entry */
-    LWGSM_CMD_CPBW_GET_OPT, /*!< Get options for write Phonebook Entry */
+    LWGSM_CMD_CPBF,                             /*!< Find Phonebook Entries */
+    LWGSM_CMD_CPBR,                             /*!< Read Current Phonebook Entries  */
+    LWGSM_CMD_CPBS_SET,                         /*!< Select Phonebook Memory Storage */
+    LWGSM_CMD_CPBS_GET,                         /*!< Get current Phonebook Memory Storage */
+    LWGSM_CMD_CPBS_GET_OPT,                     /*!< Get available Phonebook Memory Storages */
+    LWGSM_CMD_CPBW_SET,                         /*!< Write Phonebook Entry */
+    LWGSM_CMD_CPBW_GET_OPT,                     /*!< Get options for write Phonebook Entry */
 
-    LWGSM_CMD_SIM_PROCESS_BASIC_CMDS, /*!< Command setup, executed when SIM is in READY state */
-    LWGSM_CMD_CPIN_SET,               /*!< Enter PIN */
-    LWGSM_CMD_CPIN_GET,               /*!< Read current SIM status */
-    LWGSM_CMD_CPIN_ADD,               /*!< Add new PIN to SIM if pin is not set */
-    LWGSM_CMD_CPIN_CHANGE,            /*!< Change already active SIM */
-    LWGSM_CMD_CPIN_REMOVE,            /*!< Remove current PIN */
-    LWGSM_CMD_CPUK_SET,               /*!< Enter PUK and set new PIN */
+    LWGSM_CMD_SIM_PROCESS_BASIC_CMDS,           /*!< Command setup, executed when SIM is in READY state */
+    LWGSM_CMD_CPIN_SET,                         /*!< Enter PIN */
+    LWGSM_CMD_CPIN_GET,                         /*!< Read current SIM status */
+    LWGSM_CMD_CPIN_ADD,                         /*!< Add new PIN to SIM if pin is not set */
+    LWGSM_CMD_CPIN_CHANGE,                      /*!< Change already active SIM */
+    LWGSM_CMD_CPIN_REMOVE,                      /*!< Remove current PIN */
+    LWGSM_CMD_CPUK_SET,                         /*!< Enter PUK and set new PIN */
 
-    LWGSM_CMD_CSQ_GET,  /*!< Signal Quality Report */
-    LWGSM_CMD_CFUN_SET, /*!< Set Phone Functionality */
-    LWGSM_CMD_CFUN_GET, /*!< Get Phone Functionality */
-    LWGSM_CMD_CREG_SET, /*!< Network Registration set output */
-    LWGSM_CMD_CREG_GET, /*!< Get current network registration status */
-    LWGSM_CMD_CBC,      /*!< Battery Charge */
-    LWGSM_CMD_CNUM,     /*!< Subscriber Number */
+    LWGSM_CMD_CSQ_GET,                          /*!< Signal Quality Report */
+    LWGSM_CMD_CFUN_SET,                         /*!< Set Phone Functionality */
+    LWGSM_CMD_CFUN_GET,                         /*!< Get Phone Functionality */
+    LWGSM_CMD_CREG_SET,                         /*!< Network Registration set output */
+    LWGSM_CMD_CREG_GET,                         /*!< Get current network registration status */
+    LWGSM_CMD_CBC,                              /*!< Battery Charge */
+    LWGSM_CMD_CNUM,                             /*!< Subscriber Number */
 
-    LWGSM_CMD_CPWD,     /*!< Change Password */
-    LWGSM_CMD_CR,       /*!< Service Reporting Control */
-    LWGSM_CMD_CRC,      /*!< Set Cellular Result Codes for Incoming Call Indication */
-    LWGSM_CMD_CRLP,     /*!< Select Radio Link Protocol Parameters  */
-    LWGSM_CMD_CRSM,     /*!< Restricted SIM Access */
-    LWGSM_CMD_VTD,      /*!< Tone Duration */
-    LWGSM_CMD_VTS,      /*!< DTMF and Tone Generation */
-    LWGSM_CMD_CMUX,     /*!< Multiplexer Control */
-    LWGSM_CMD_CPOL,     /*!< Preferred Operator List */
-    LWGSM_CMD_COPN,     /*!< Read Operator Names */
-    LWGSM_CMD_CCLK,     /*!< Clock */
-    LWGSM_CMD_CSIM,     /*!< Generic SIM Access */
-    LWGSM_CMD_CALM,     /*!< Alert Sound Mode */
-    LWGSM_CMD_CALS,     /*!< Alert Sound Select */
-    LWGSM_CMD_CRSL,     /*!< Ringer Sound Level */
-    LWGSM_CMD_CLVL,     /*!< Loud Speaker Volume Level */
-    LWGSM_CMD_CMUT,     /*!< Mute Control */
-    LWGSM_CMD_CPUC,     /*!< Price Per Unit and Currency Table */
-    LWGSM_CMD_CCWE,     /*!< Call Meter Maximum Event */
-    LWGSM_CMD_CUSD_SET, /*!< Unstructured Supplementary Service Data, Set command */
-    LWGSM_CMD_CUSD_GET, /*!< Unstructured Supplementary Service Data, Get command */
-    LWGSM_CMD_CUSD,     /*!< Unstructured Supplementary Service Data, Execute command */
-    LWGSM_CMD_CSSN,     /*!< Supplementary Services Notification */
+    LWGSM_CMD_CPWD,                             /*!< Change Password */
+    LWGSM_CMD_CR,                               /*!< Service Reporting Control */
+    LWGSM_CMD_CRC,                              /*!< Set Cellular Result Codes for Incoming Call Indication */
+    LWGSM_CMD_CRLP,                             /*!< Select Radio Link Protocol Parameters  */
+    LWGSM_CMD_CRSM,                             /*!< Restricted SIM Access */
+    LWGSM_CMD_VTD,                              /*!< Tone Duration */
+    LWGSM_CMD_VTS,                              /*!< DTMF and Tone Generation */
+    LWGSM_CMD_CMUX,                             /*!< Multiplexer Control */
+    LWGSM_CMD_CPOL,                             /*!< Preferred Operator List */
+    LWGSM_CMD_COPN,                             /*!< Read Operator Names */
+    LWGSM_CMD_CCLK,                             /*!< Clock */
+    LWGSM_CMD_CSIM,                             /*!< Generic SIM Access */
+    LWGSM_CMD_CALM,                             /*!< Alert Sound Mode */
+    LWGSM_CMD_CALS,                             /*!< Alert Sound Select */
+    LWGSM_CMD_CRSL,                             /*!< Ringer Sound Level */
+    LWGSM_CMD_CLVL,                             /*!< Loud Speaker Volume Level */
+    LWGSM_CMD_CMUT,                             /*!< Mute Control */
+    LWGSM_CMD_CPUC,                             /*!< Price Per Unit and Currency Table */
+    LWGSM_CMD_CCWE,                             /*!< Call Meter Maximum Event */
+    LWGSM_CMD_CUSD_SET,                         /*!< Unstructured Supplementary Service Data, Set command */
+    LWGSM_CMD_CUSD_GET,                         /*!< Unstructured Supplementary Service Data, Get command */
+    LWGSM_CMD_CUSD,                             /*!< Unstructured Supplementary Service Data, Execute command */
+    LWGSM_CMD_CSSN,                             /*!< Supplementary Services Notification */
 
-    LWGSM_CMD_CIPMUX,     /*!< Start Up Multi-IP Connection */
-    LWGSM_CMD_CIPSTART,   /*!< Start Up TCP or UDP Connection */
-    LWGSM_CMD_CIPSEND,    /*!< Send Data Through TCP or UDP Connection */
-    LWGSM_CMD_CIPQSEND,   /*!< Select Data Transmitting Mode */
-    LWGSM_CMD_CIPACK,     /*!< Query Previous Connection Data Transmitting State */
-    LWGSM_CMD_CIPCLOSE,   /*!< Close TCP or UDP Connection */
-    LWGSM_CMD_CIPSHUT,    /*!< Deactivate GPRS PDP Context */
-    LWGSM_CMD_CLPORT,     /*!< Set Local Port */
-    LWGSM_CMD_CSTT,       /*!< Start Task and Set APN, username, password */
-    LWGSM_CMD_CIICR,      /*!< Bring Up Wireless Connection with GPRS or CSD */
-    LWGSM_CMD_CIFSR,      /*!< Get Local IP Address */
-    LWGSM_CMD_CIPSTATUS,  /*!< Query Current Connection Status */
-    LWGSM_CMD_CDNSCFG,    /*!< Configure Domain Name Server */
-    LWGSM_CMD_CDNSGIP,    /*!< Query the IP Address of Given Domain Name */
-    LWGSM_CMD_CIPHEAD,    /*!< Add an IP Head at the Beginning of a Package Received */
-    LWGSM_CMD_CIPATS,     /*!< Set Auto Sending Timer */
-    LWGSM_CMD_CIPSPRT,    /*!< Set Prompt of greater than sign When Module Sends Data */
-    LWGSM_CMD_CIPSERVER,  /*!< Configure Module as Server */
-    LWGSM_CMD_CIPCSGP,    /*!< Set CSD or GPRS for Connection Mode */
-    LWGSM_CMD_CIPSRIP,    /*!< Show Remote IP Address and Port When Received Data */
-    LWGSM_CMD_CIPDPDP,    /*!< Set Whether to Check State of GPRS Network Timing */
-    LWGSM_CMD_CIPMODE,    /*!< Select TCPIP Application Mode */
-    LWGSM_CMD_CIPCCFG,    /*!< Configure Transparent Transfer Mode */
-    LWGSM_CMD_CIPSHOWTP,  /*!< Display Transfer Protocol in IP Head When Received Data */
-    LWGSM_CMD_CIPUDPMODE, /*!< UDP Extended Mode */
-    LWGSM_CMD_CIPRXGET,   /*!< Get Data from Network Manually */
-    LWGSM_CMD_CIPSCONT,   /*!< Save TCPIP Application Context */
-    LWGSM_CMD_CIPRDTIMER, /*!< Set Remote Delay Timer */
-    LWGSM_CMD_CIPSGTXT,   /*!< Select GPRS PDP context */
-    LWGSM_CMD_CIPTKA,     /*!< Set TCP Keepalive Parameters */
-    LWGSM_CMD_CIPSSL,     /*!< Connection SSL function */
+    LWGSM_CMD_CIPMUX,                           /*!< Start Up Multi-IP Connection */
+    LWGSM_CMD_CIPSTART,                         /*!< Start Up TCP or UDP Connection */
+    LWGSM_CMD_CIPSEND,                          /*!< Send Data Through TCP or UDP Connection */
+    LWGSM_CMD_CIPQSEND,                         /*!< Select Data Transmitting Mode */
+    LWGSM_CMD_CIPACK,                           /*!< Query Previous Connection Data Transmitting State */
+    LWGSM_CMD_CIPCLOSE,                         /*!< Close TCP or UDP Connection */
+    LWGSM_CMD_CIPSHUT,                          /*!< Deactivate GPRS PDP Context */
+    LWGSM_CMD_CLPORT,                           /*!< Set Local Port */
+    LWGSM_CMD_CSTT,                             /*!< Start Task and Set APN, username, password */
+    LWGSM_CMD_CIICR,                            /*!< Bring Up Wireless Connection with GPRS or CSD */
+    LWGSM_CMD_CIFSR,                            /*!< Get Local IP Address */
+    LWGSM_CMD_CIPSTATUS,                        /*!< Query Current Connection Status */
+    LWGSM_CMD_CDNSCFG,                          /*!< Configure Domain Name Server */
+    LWGSM_CMD_CDNSGIP,                          /*!< Query the IP Address of Given Domain Name */
+    LWGSM_CMD_CIPHEAD,                          /*!< Add an IP Head at the Beginning of a Package Received */
+    LWGSM_CMD_CIPATS,                           /*!< Set Auto Sending Timer */
+    LWGSM_CMD_CIPSPRT,                          /*!< Set Prompt of greater than sign When Module Sends Data */
+    LWGSM_CMD_CIPSERVER,                        /*!< Configure Module as Server */
+    LWGSM_CMD_CIPCSGP,                          /*!< Set CSD or GPRS for Connection Mode */
+    LWGSM_CMD_CIPSRIP,                          /*!< Show Remote IP Address and Port When Received Data */
+    LWGSM_CMD_CIPDPDP,                          /*!< Set Whether to Check State of GPRS Network Timing */
+    LWGSM_CMD_CIPMODE,                          /*!< Select TCPIP Application Mode */
+    LWGSM_CMD_CIPCCFG,                          /*!< Configure Transparent Transfer Mode */
+    LWGSM_CMD_CIPSHOWTP,                        /*!< Display Transfer Protocol in IP Head When Received Data */
+    LWGSM_CMD_CIPUDPMODE,                       /*!< UDP Extended Mode */
+    LWGSM_CMD_CIPRXGET,                         /*!< Get Data from Network Manually */
+    LWGSM_CMD_CIPSCONT,                         /*!< Save TCPIP Application Context */
+    LWGSM_CMD_CIPRDTIMER,                       /*!< Set Remote Delay Timer */
+    LWGSM_CMD_CIPSGTXT,                         /*!< Select GPRS PDP context */
+    LWGSM_CMD_CIPTKA,                           /*!< Set TCP Keepalive Parameters */
+    LWGSM_CMD_CIPSSL,                           /*!< Connection SSL function */
 
     LWGSM_CMD_SMS_ENABLE,
-    LWGSM_CMD_CMGD,         /*!< Delete SMS Message */
-    LWGSM_CMD_CMGF,         /*!< Select SMS Message Format */
-    LWGSM_CMD_CMGL,         /*!< List SMS Messages from Preferred Store */
-    LWGSM_CMD_CMGR,         /*!< Read SMS Message */
-    LWGSM_CMD_CMGS,         /*!< Send SMS Message */
-    LWGSM_CMD_CMGW,         /*!< Write SMS Message to Memory */
-    LWGSM_CMD_CMSS,         /*!< Send SMS Message from Storage */
-    LWGSM_CMD_CMGDA,        /*!< MASS SMS delete */
-    LWGSM_CMD_CNMI,         /*!< New SMS Message Indications */
-    LWGSM_CMD_CPMS_SET,     /*!< Set preferred SMS Message Storage */
-    LWGSM_CMD_CPMS_GET,     /*!< Get preferred SMS Message Storage */
-    LWGSM_CMD_CPMS_GET_OPT, /*!< Get optional SMS message storages */
-    LWGSM_CMD_CRES,         /*!< Restore SMS Settings */
-    LWGSM_CMD_CSAS,         /*!< Save SMS Settings */
-    LWGSM_CMD_CSCA,         /*!< SMS Service Center Address */
-    LWGSM_CMD_CSCB,         /*!< Select Cell Broadcast SMS Messages */
-    LWGSM_CMD_CSDH,         /*!< Show SMS Text Mode Parameters */
-    LWGSM_CMD_CSMP,         /*!< Set SMS Text Mode Parameters */
-    LWGSM_CMD_CSMS,         /*!< Select Message Service */
+    LWGSM_CMD_CMGD,                             /*!< Delete SMS Message */
+    LWGSM_CMD_CMGF,                             /*!< Select SMS Message Format */
+    LWGSM_CMD_CMGL,                             /*!< List SMS Messages from Preferred Store */
+    LWGSM_CMD_CMGR,                             /*!< Read SMS Message */
+    LWGSM_CMD_CMGS,                             /*!< Send SMS Message */
+    LWGSM_CMD_CMGW,                             /*!< Write SMS Message to Memory */
+    LWGSM_CMD_CMSS,                             /*!< Send SMS Message from Storage */
+    LWGSM_CMD_CMGDA,                            /*!< MASS SMS delete */
+    LWGSM_CMD_CNMI,                             /*!< New SMS Message Indications */
+    LWGSM_CMD_CPMS_SET,                         /*!< Set preferred SMS Message Storage */
+    LWGSM_CMD_CPMS_GET,                         /*!< Get preferred SMS Message Storage */
+    LWGSM_CMD_CPMS_GET_OPT,                     /*!< Get optional SMS message storages */
+    LWGSM_CMD_CRES,                             /*!< Restore SMS Settings */
+    LWGSM_CMD_CSAS,                             /*!< Save SMS Settings */
+    LWGSM_CMD_CSCA,                             /*!< SMS Service Center Address */
+    LWGSM_CMD_CSCB,                             /*!< Select Cell Broadcast SMS Messages */
+    LWGSM_CMD_CSDH,                             /*!< Show SMS Text Mode Parameters */
+    LWGSM_CMD_CSMP,                             /*!< Set SMS Text Mode Parameters */
+    LWGSM_CMD_CSMS,                             /*!< Select Message Service */
 
     /* AT command for GNSS */
     LWGSM_CMD_GNSS_ENABLE,
     LWGSM_CMD_GNSS_DISABLE,
     LWGSM_CMD_GNSS_URC,
-    LWGSM_CMD_CGNSPWR,     /*!< Turn on Gnss Module*/
+    LWGSM_CMD_CGNSPWR,                          /*!< Turn on Gnss Module*/
     // AMIN
-    LWGSM_CMD_CGNSPWR_GET, /*!< Get Gnss Module Power Status*/
-    LWGSM_CMD_CGNSIPR_SET, /*!< Set Gnss Module Baudrate*/
-    LWGSM_CMD_CGNSIPR_GET, /*!< Get Gnss Module Baudrate*/
+    LWGSM_CMD_CGNSPWR_GET,                      /*!< Get Gnss Module Power Status*/
+    LWGSM_CMD_CGNSIPR_SET,                      /*!< Set Gnss Module Baudrate*/
+    LWGSM_CMD_CGNSIPR_GET,                      /*!< Get Gnss Module Baudrate*/
     // AMIN
-    LWGSM_CMD_CGNSINF_GET, /*!< Get information from gnss module*/
-    LWGSM_CMD_CGNSURC,     /*!< Set navigation data URC report*/
+    LWGSM_CMD_CGNSINF_GET,                      /*!< Get information from gnss module*/
+    LWGSM_CMD_CGNSURC,                          /*!< Set navigation data URC report*/
 
     /* AT command for HTTP */
-    LWGSM_CMD_HTTP_EBANLE,       /*!< ENABLE HTTP service*/
-    LWGSM_CMD_HTTP_INIT,         /*!< Initialize HTTP service*/
-    LWGSM_CMD_HTTP_TERM,         /*!< Terminate HTTP service*/
-    LWGSM_CMD_HTTP_SET_PARAM,    /*!< Set HTTP parameters value*/
-    LWGSM_CMD_HTTP_READ_PARAM,   /*!< Read HTTP parameters value*/
-    LWGSM_CMD_HTTP_SET_DATA,     /*!< Input HTTP data*/
-    LWGSM_CMD_HTTP_SET_METHOD,   /*!< HTTP method action*/
-    LWGSM_CMD_HTTP_READ_RESP,    /*!< Read the HTTP server response*/
-    LWGSM_CMD_HTTP_SAVE_CONTEXT, /*!< Save HTTP application context*/
-    LWGSM_CMD_HTTP_READ_STATUS,  /*!< Read HTTP status*/
-    LWGSM_CMD_HTTP_RESP_HEADER,  /*!< Read the Http header information of server response*/
+    LWGSM_CMD_HTTP_EBANLE,                      /*!< ENABLE HTTP service*/
+    LWGSM_CMD_HTTP_INIT,                        /*!< Initialize HTTP service*/
+    LWGSM_CMD_HTTP_TERM,                        /*!< Terminate HTTP service*/
+    LWGSM_CMD_HTTP_SET_PARAM,                   /*!< Set HTTP parameters value*/
+    LWGSM_CMD_HTTP_READ_PARAM,                  /*!< Read HTTP parameters value*/
+    LWGSM_CMD_HTTP_SET_DATA,                    /*!< Input HTTP data*/
+    LWGSM_CMD_HTTP_SET_METHOD,                  /*!< HTTP method action*/
+    LWGSM_CMD_HTTP_READ_RESP,                   /*!< Read the HTTP server response*/
+    LWGSM_CMD_HTTP_SAVE_CONTEXT,                /*!< Save HTTP application context*/
+    LWGSM_CMD_HTTP_READ_STATUS,                 /*!< Read HTTP status*/
+    LWGSM_CMD_HTTP_RESP_HEADER,                 /*!< Read the Http header information of server response*/
 
-    LWGSM_CMD_SAPBR,           /*!< Bearer settings for applications based on IP */
-    LWGSM_CMD_SAPBR_SET_PARAM, /*!< Set Connection Parameter like Contype */
+    LWGSM_CMD_SAPBR,                            /*!< Bearer settings for applications based on IP */
+    LWGSM_CMD_SAPBR_SET_PARAM,                  /*!< Set Connection Parameter like Contype */
 
-    LWGSM_CMD_END, /*!< Last CMD entry */
+    LWGSM_CMD_END,                              /*!< Last CMD entry */
 } lwgsm_cmd_t;
 
 /**
  * \brief           Connection structure
  */
 typedef struct lwgsm_conn {
-    lwgsm_conn_type_t type;   /*!< Connection type */
-    uint8_t num;              /*!< Connection number */
-    lwgsm_ip_t remote_ip;     /*!< Remote IP address */
-    lwgsm_port_t remote_port; /*!< Remote port number */
-    lwgsm_port_t local_port;  /*!< Local IP address */
-    lwgsm_evt_fn evt_func;    /*!< Callback function for connection */
-    void* arg;                /*!< User custom argument */
+    lwgsm_conn_type_t type;                     /*!< Connection type */
+    uint8_t num;                                /*!< Connection number */
+    lwgsm_ip_t remote_ip;                       /*!< Remote IP address */
+    lwgsm_port_t remote_port;                   /*!< Remote port number */
+    lwgsm_port_t local_port;                    /*!< Local IP address */
+    lwgsm_evt_fn evt_func;                      /*!< Callback function for connection */
+    void* arg;                                  /*!< User custom argument */
 
     uint8_t val_id; /*!< Validation ID number. It is increased each time a new connection is established.
                        It protects sending data to wrong connection in case we have data in send queue,
                        and connection was closed and active again in between. */
 
-    lwgsm_linbuff_t buff; /*!< Linear buffer structure */
+    lwgsm_linbuff_t buff;                       /*!< Linear buffer structure */
 
-    size_t total_recved; /*!< Total number of bytes received */
+    size_t total_recved;                        /*!< Total number of bytes received */
 
     union {
         struct {
-            uint8_t active : 1;        /*!< Status whether connection is active */
-            uint8_t client : 1;        /*!< Status whether connection is in client mode */
-            uint8_t data_received : 1; /*!< Status whether first data were received on connection */
+            uint8_t active : 1;                 /*!< Status whether connection is active */
+            uint8_t client : 1;                 /*!< Status whether connection is in client mode */
+            uint8_t data_received : 1;          /*!< Status whether first data were received on connection */
             uint8_t in_closing : 1;    /*!< Status if connection is in closing mode.
                                     When in closing mode, ignore any possible received data from function */
-            uint8_t bearer : 1;        /*!< Bearer used. Can be `1` or `0` */
-        } f;                         /*!< Connection flags */
-    } status;                      /*!< Connection status union with flag bits */
+            uint8_t bearer : 1;                 /*!< Bearer used. Can be `1` or `0` */
+        } f;                                    /*!< Connection flags */
+    } status;                                   /*!< Connection status union with flag bits */
 } lwgsm_conn_t;
 
 /**
@@ -320,293 +320,293 @@ typedef struct lwgsm_conn {
  * \brief           Packet buffer structure
  */
 typedef struct lwgsm_pbuf {
-    struct lwgsm_pbuf* next; /*!< Next pbuf in chain list */
-    size_t tot_len;          /*!< Total length of pbuf chain */
-    size_t len;              /*!< Length of payload */
-    size_t ref;              /*!< Number of references to this structure */
-    uint8_t* payload;        /*!< Pointer to payload memory */
-    lwgsm_ip_t ip;           /*!< Remote address for received IPD data */
-    lwgsm_port_t port;       /*!< Remote port for received IPD data */
+    struct lwgsm_pbuf* next;                    /*!< Next pbuf in chain list */
+    size_t tot_len;                             /*!< Total length of pbuf chain */
+    size_t len;                                 /*!< Length of payload */
+    size_t ref;                                 /*!< Number of references to this structure */
+    uint8_t* payload;                           /*!< Pointer to payload memory */
+    lwgsm_ip_t ip;                              /*!< Remote address for received IPD data */
+    lwgsm_port_t port;                          /*!< Remote port for received IPD data */
 } lwgsm_pbuf_t;
 
 /**
  * \brief           Incoming network data read structure
  */
 typedef struct {
-    uint8_t read;      /*!< Set to 1 when we should process input data as connection data */
-    size_t tot_len;    /*!< Total length of packet */
-    size_t rem_len;    /*!< Remaining bytes to read in current +IPD statement */
-    lwgsm_conn_p conn; /*!< Pointer to connection for network data */
+    uint8_t read;                               /*!< Set to 1 when we should process input data as connection data */
+    size_t tot_len;                             /*!< Total length of packet */
+    size_t rem_len;                             /*!< Remaining bytes to read in current +IPD statement */
+    lwgsm_conn_p conn;                          /*!< Pointer to connection for network data */
 
     size_t buff_ptr;   /*!< Buffer pointer to save data to.
                           When set to `NULL` while `read = 1`, reading should ignore incoming data */
-    lwgsm_pbuf_p buff; /*!< Pointer to data buffer used for receiving data */
+    lwgsm_pbuf_p buff;                          /*!< Pointer to data buffer used for receiving data */
 } lwgsm_ipd_t;
 
 /**
  * \brief           Connection result on connect command
  */
 typedef enum {
-    LWGSM_CONN_CONNECT_UNKNOWN, /*!< No valid result */
-    LWGSM_CONN_CONNECT_OK,      /*!< Connected OK */
-    LWGSM_CONN_CONNECT_ERROR,   /*!< Error on connection */
-    LWGSM_CONN_CONNECT_ALREADY, /*!< Already connected */
+    LWGSM_CONN_CONNECT_UNKNOWN,                 /*!< No valid result */
+    LWGSM_CONN_CONNECT_OK,                      /*!< Connected OK */
+    LWGSM_CONN_CONNECT_ERROR,                   /*!< Error on connection */
+    LWGSM_CONN_CONNECT_ALREADY,                 /*!< Already connected */
 } lwgsm_conn_connect_res_t;
 
 /**
  * \brief           Message queue structure to share between threads
  */
 typedef struct lwgsm_msg {
-    lwgsm_cmd_t cmd_def;                /*!< Default message type received from queue */
-    lwgsm_cmd_t cmd;                    /*!< Since some commands can have different subcommands, sub command is used here */
-    uint8_t i;                          /*!< Variable to indicate order number of subcommands */
-    lwgsm_sys_sem_t sem;                /*!< Semaphore for the message */
-    uint8_t is_blocking;                /*!< Status if command is blocking */
-    uint32_t block_time;                /*!< Maximal blocking time in units of milliseconds. Use 0 to for non-blocking call */
-    lwgsmr_t res;                       /*!< Result of message operation */
-    lwgsmr_t (*fn)(struct lwgsm_msg*);  /*!< Processing callback function to process packet */
+    lwgsm_cmd_t cmd_def;                        /*!< Default message type received from queue */
+    lwgsm_cmd_t cmd;                            /*!< Since some commands can have different subcommands, sub command is used here */
+    uint8_t i;                                  /*!< Variable to indicate order number of subcommands */
+    lwgsm_sys_sem_t sem;                        /*!< Semaphore for the message */
+    uint8_t is_blocking;                        /*!< Status if command is blocking */
+    uint32_t block_time;                        /*!< Maximal blocking time in units of milliseconds. Use 0 to for non-blocking call */
+    lwgsmr_t res;                               /*!< Result of message operation */
+    lwgsmr_t (*fn)(struct lwgsm_msg*);          /*!< Processing callback function to process packet */
 
 #if LWGSM_CFG_USE_API_FUNC_EVT
-    lwgsm_api_cmd_evt_fn evt_fn; /*!< Command callback API function */
-    void* evt_arg;               /*!< Command callback API callback parameter */
+    lwgsm_api_cmd_evt_fn evt_fn;                /*!< Command callback API function */
+    void* evt_arg;                              /*!< Command callback API callback parameter */
 #endif                         /* LWGSM_CFG_USE_API_FUNC_EVT */
 
     union {
         struct {
-            uint32_t delay; /*!< Delay to use before sending first reset AT command */
-        } reset;          /*!< Reset device */
+            uint32_t delay;                     /*!< Delay to use before sending first reset AT command */
+        } reset;                                /*!< Reset device */
         struct {
-            uint32_t baudrate; /*!< Baudrate for AT port */
-        } uart;              /*!< UART configuration */
+            uint32_t baudrate;                  /*!< Baudrate for AT port */
+        } uart;                                 /*!< UART configuration */
 
         struct {
-            uint8_t mode; /*!< Functionality mode */
-        } cfun;         /*!< Set phone functionality */
+            uint8_t mode;                       /*!< Functionality mode */
+        } cfun;                                 /*!< Set phone functionality */
 
         struct {
-            const char* pin; /*!< Pin code to write */
-        } cpin_enter;      /*!< Enter pin code */
+            const char* pin;                    /*!< Pin code to write */
+        } cpin_enter;                           /*!< Enter pin code */
         struct {
-            const char* pin; /*!< New pin code */
-        } cpin_add;        /*!< Add pin code if previously wasn't set */
+            const char* pin;                    /*!< New pin code */
+        } cpin_add;                             /*!< Add pin code if previously wasn't set */
         struct {
-            const char* current_pin; /*!< Current pin code */
-            const char* new_pin;     /*!< New pin code */
-        } cpin_change;             /*!< Change current pin code */
+            const char* current_pin;            /*!< Current pin code */
+            const char* new_pin;                /*!< New pin code */
+        } cpin_change;                          /*!< Change current pin code */
         struct {
-            const char* pin; /*!< Current pin code */
-        } cpin_remove;     /*!< Remove PIN code */
+            const char* pin;                    /*!< Current pin code */
+        } cpin_remove;                          /*!< Remove PIN code */
         struct {
-            const char* puk; /*!< PUK code */
-            const char* pin; /*!< New PIN code */
-        } cpuk_enter;      /*!< Enter PUK and new PIN */
+            const char* puk;                    /*!< PUK code */
+            const char* pin;                    /*!< New PIN code */
+        } cpuk_enter;                           /*!< Enter PUK and new PIN */
         struct {
-            size_t cnum_tries; /*!< Number of tries */
-        } sim_info;          /*!< Get information for SIM card */
+            size_t cnum_tries;                  /*!< Number of tries */
+        } sim_info;                             /*!< Get information for SIM card */
 
         struct {
-            char* str;   /*!< Pointer to output string array */
-            size_t len;  /*!< Length of output string array including trailing zero memory */
-        } device_info; /*!< All kind of device info, serial number, model, manufacturer, revision */
+            char* str;                          /*!< Pointer to output string array */
+            size_t len;                         /*!< Length of output string array including trailing zero memory */
+        } device_info;                          /*!< All kind of device info, serial number, model, manufacturer, revision */
 
         struct {
-            int16_t* rssi; /*!< Pointer to RSSI variable */
-        } csq;           /*!< Signal strength */
+            int16_t* rssi;                      /*!< Pointer to RSSI variable */
+        } csq;                                  /*!< Signal strength */
         struct {
-            uint8_t read;          /*!< Flag indicating we can read the COPS actual data */
-            lwgsm_operator_t* ops; /*!< Pointer to operators array */
-            size_t opsl;           /*!< Length of operators array */
-            size_t opsi;           /*!< Current operator index array */
-            size_t* opf;           /*!< Pointer to number of operators found */
-        } cops_scan;             /*!< Scan operators */
+            uint8_t read;                       /*!< Flag indicating we can read the COPS actual data */
+            lwgsm_operator_t* ops;              /*!< Pointer to operators array */
+            size_t opsl;                        /*!< Length of operators array */
+            size_t opsi;                        /*!< Current operator index array */
+            size_t* opf;                        /*!< Pointer to number of operators found */
+        } cops_scan;                            /*!< Scan operators */
         struct {
-            lwgsm_operator_curr_t* curr; /*!< Pointer to output current operator */
-        } cops_get;                    /*!< Get current operator info */
+            lwgsm_operator_curr_t* curr;        /*!< Pointer to output current operator */
+        } cops_get;                             /*!< Get current operator info */
         struct {
-            lwgsm_operator_mode_t mode;     /*!< COPS mode */
-            lwgsm_operator_format_t format; /*!< Operator format to print */
-            const char* name;               /*!< Short or long name, according to format */
-            uint32_t num;                   /*!< Number in case format is number */
-        } cops_set;                       /*!< Set operator settings */
+            lwgsm_operator_mode_t mode;         /*!< COPS mode */
+            lwgsm_operator_format_t format;     /*!< Operator format to print */
+            const char* name;                   /*!< Short or long name, according to format */
+            uint32_t num;                       /*!< Number in case format is number */
+        } cops_set;                             /*!< Set operator settings */
 
 #if LWGSM_CFG_CONN || __DOXYGEN__
         /* Connection based commands */
         struct {
-            lwgsm_conn_t** conn;               /*!< Pointer to pointer to save connection used */
-            const char* host;                  /*!< Host to use for connection */
-            lwgsm_port_t port;                 /*!< Remote port used for connection */
-            lwgsm_conn_type_t type;            /*!< Connection type */
-            void* arg;                         /*!< Connection custom argument */
-            lwgsm_evt_fn evt_func;             /*!< Callback function to use on connection */
-            uint8_t num;                       /*!< Connection number used for start */
-            lwgsm_conn_connect_res_t conn_res; /*!< Connection result status */
-        } conn_start;                        /*!< Structure for starting new connection */
+            lwgsm_conn_t** conn;                /*!< Pointer to pointer to save connection used */
+            const char* host;                   /*!< Host to use for connection */
+            lwgsm_port_t port;                  /*!< Remote port used for connection */
+            lwgsm_conn_type_t type;             /*!< Connection type */
+            void* arg;                          /*!< Connection custom argument */
+            lwgsm_evt_fn evt_func;              /*!< Callback function to use on connection */
+            uint8_t num;                        /*!< Connection number used for start */
+            lwgsm_conn_connect_res_t conn_res;  /*!< Connection result status */
+        } conn_start;                           /*!< Structure for starting new connection */
         struct {
-            lwgsm_conn_t* conn; /*!< Pointer to connection to close */
-            uint8_t val_id;     /*!< Connection current validation ID when command was sent to queue */
-        } conn_close;         /*!< Close connection */
+            lwgsm_conn_t* conn;                 /*!< Pointer to connection to close */
+            uint8_t val_id;                     /*!< Connection current validation ID when command was sent to queue */
+        } conn_close;                           /*!< Close connection */
         struct {
-            lwgsm_conn_t* conn;          /*!< Pointer to connection to send data */
-            size_t btw;                  /*!< Number of remaining bytes to write */
-            size_t ptr;                  /*!< Current write pointer for data */
-            const uint8_t* data;         /*!< Data to send */
-            size_t sent;                 /*!< Number of bytes sent in last packet */
-            size_t sent_all;             /*!< Number of bytes sent all together */
-            uint8_t tries;               /*!< Number of tries used for last packet */
-            uint8_t wait_send_ok_err;    /*!< Set to 1 when we wait for SEND OK or SEND ERROR */
-            const lwgsm_ip_t* remote_ip; /*!< Remote IP address for UDP connection */
-            lwgsm_port_t remote_port;    /*!< Remote port address for UDP connection */
-            uint8_t fau;                 /*!< Free after use flag to free memory after data are sent (or not) */
-            size_t* bw;                  /*!< Number of bytes written so far */
-            uint8_t val_id;              /*!< Connection current validation ID when command was sent to queue */
-        } conn_send;                   /*!< Structure to send data on connection */
+            lwgsm_conn_t* conn;                 /*!< Pointer to connection to send data */
+            size_t btw;                         /*!< Number of remaining bytes to write */
+            size_t ptr;                         /*!< Current write pointer for data */
+            const uint8_t* data;                /*!< Data to send */
+            size_t sent;                        /*!< Number of bytes sent in last packet */
+            size_t sent_all;                    /*!< Number of bytes sent all together */
+            uint8_t tries;                      /*!< Number of tries used for last packet */
+            uint8_t wait_send_ok_err;           /*!< Set to 1 when we wait for SEND OK or SEND ERROR */
+            const lwgsm_ip_t* remote_ip;        /*!< Remote IP address for UDP connection */
+            lwgsm_port_t remote_port;           /*!< Remote port address for UDP connection */
+            uint8_t fau;                        /*!< Free after use flag to free memory after data are sent (or not) */
+            size_t* bw;                         /*!< Number of bytes written so far */
+            uint8_t val_id;                     /*!< Connection current validation ID when command was sent to queue */
+        } conn_send;                            /*!< Structure to send data on connection */
 #endif                             /* LWGSM_CFG_CONN || __DOXYGEN__ */
 #if LWGSM_CFG_SMS || __DOXYGEN__
         struct {
-            const char* num;  /*!< Phone number */
-            const char* text; /*!< SMS content to send */
-            uint8_t format;   /*!< SMS format, `0 = PDU`, `1 = text` */
-            size_t pos;       /*!< Set on +CMGS response if command is OK */
-        } sms_send;         /*!< Send SMS */
+            const char* num;                    /*!< Phone number */
+            const char* text;                   /*!< SMS content to send */
+            uint8_t format;                     /*!< SMS format, `0 = PDU`, `1 = text` */
+            size_t pos;                         /*!< Set on +CMGS response if command is OK */
+        } sms_send;                             /*!< Send SMS */
         struct {
-            lwgsm_mem_t mem;          /*!< Memory to read from */
-            size_t pos;               /*!< SMS position in memory */
-            lwgsm_sms_entry_t* entry; /*!< Pointer to entry to write info */
-            uint8_t update;           /*!< Update SMS status after read operation */
-            uint8_t format;           /*!< SMS format, `0 = PDU`, `1 = text` */
-            uint8_t read;             /*!< Read the data flag */
-        } sms_read;                 /*!< Read single SMS */
+            lwgsm_mem_t mem;                    /*!< Memory to read from */
+            size_t pos;                         /*!< SMS position in memory */
+            lwgsm_sms_entry_t* entry;           /*!< Pointer to entry to write info */
+            uint8_t update;                     /*!< Update SMS status after read operation */
+            uint8_t format;                     /*!< SMS format, `0 = PDU`, `1 = text` */
+            uint8_t read;                       /*!< Read the data flag */
+        } sms_read;                             /*!< Read single SMS */
         struct {
-            lwgsm_mem_t mem; /*!< Memory to delete from */
-            size_t pos;      /*!< SMS position in memory */
-        } sms_delete;      /*!< Delete SMS message */
+            lwgsm_mem_t mem;                    /*!< Memory to delete from */
+            size_t pos;                         /*!< SMS position in memory */
+        } sms_delete;                           /*!< Delete SMS message */
         struct {
-            lwgsm_sms_status_t status; /*!< SMS status to delete */
-        } sms_delete_all;            /*!< Mass delete SMS messages */
+            lwgsm_sms_status_t status;          /*!< SMS status to delete */
+        } sms_delete_all;                       /*!< Mass delete SMS messages */
         struct {
-            lwgsm_mem_t mem;            /*!< Memory to use for read */
-            lwgsm_sms_status_t status;  /*!< SMS entries status */
-            lwgsm_sms_entry_t* entries; /*!< Pointer to entries */
-            size_t etr;                 /*!< Entries to read (array length) */
-            size_t ei;                  /*!< Current entry index in array */
-            size_t* er;                 /*!< Final entries read pointer for user */
-            uint8_t update;             /*!< Update SMS status after read operation */
-            uint8_t format;             /*!< SMS format, `0 = PDU`, `1 = text` */
-            uint8_t read;               /*!< Read the data flag */
-        } sms_list;                   /*!< List SMS messages */
+            lwgsm_mem_t mem;                    /*!< Memory to use for read */
+            lwgsm_sms_status_t status;          /*!< SMS entries status */
+            lwgsm_sms_entry_t* entries;         /*!< Pointer to entries */
+            size_t etr;                         /*!< Entries to read (array length) */
+            size_t ei;                          /*!< Current entry index in array */
+            size_t* er;                         /*!< Final entries read pointer for user */
+            uint8_t update;                     /*!< Update SMS status after read operation */
+            uint8_t format;                     /*!< SMS format, `0 = PDU`, `1 = text` */
+            uint8_t read;                       /*!< Read the data flag */
+        } sms_list;                             /*!< List SMS messages */
         struct {
-            lwgsm_mem_t mem[3]; /*!< Array of memories */
-        } sms_memory;         /*!< Set preferred memories */
+            lwgsm_mem_t mem[3];                 /*!< Array of memories */
+        } sms_memory;                           /*!< Set preferred memories */
 #endif                    /* LWGSM_CFG_SMS || __DOXYGEN__ */
 #if LWGSM_CFG_CALL || __DOXYGEN__
         struct {
-            const char* number; /*!< Phone number to dial */
-        } call_start;         /*!< Start a new call */
+            const char* number;                 /*!< Phone number to dial */
+        } call_start;                           /*!< Start a new call */
 #endif                    /* LWGSM_CFG_CALL || __DOXYGEN__ */
 #if LWGSM_CFG_PHONEBOOK || __DOXYGEN__
         struct {
-            lwgsm_mem_t mem;          /*!< Memory to use */
-            size_t pos;               /*!< Memory position. Set to 0 to use new one or SIZE_T MAX to delete entry */
-            const char* name;         /*!< Entry name */
-            const char* num;          /*!< Entry number */
-            lwgsm_number_type_t type; /*!< Entry phone number type */
-            uint8_t del;              /*!< Flag indicates delete */
-        } pb_write;                 /*!< Write/Edit/Delete entry */
+            lwgsm_mem_t mem;                    /*!< Memory to use */
+            size_t pos;                         /*!< Memory position. Set to 0 to use new one or SIZE_T MAX to delete entry */
+            const char* name;                   /*!< Entry name */
+            const char* num;                    /*!< Entry number */
+            lwgsm_number_type_t type;           /*!< Entry phone number type */
+            uint8_t del;                        /*!< Flag indicates delete */
+        } pb_write;                             /*!< Write/Edit/Delete entry */
         struct {
-            lwgsm_mem_t mem;           /*!< Memory to use */
-            size_t start_index;        /*!< Start index in phonebook to read */
-            lwgsm_pb_entry_t* entries; /*!< Pointer to entries array */
-            size_t etr;                /*!< NUmber of entries to read */
-            size_t ei;                 /*!< Current entry index */
-            size_t* er;                /*!< Final entries read pointer for user */
-        } pb_list;                   /*!< List phonebook entries */
+            lwgsm_mem_t mem;                    /*!< Memory to use */
+            size_t start_index;                 /*!< Start index in phonebook to read */
+            lwgsm_pb_entry_t* entries;          /*!< Pointer to entries array */
+            size_t etr;                         /*!< NUmber of entries to read */
+            size_t ei;                          /*!< Current entry index */
+            size_t* er;                         /*!< Final entries read pointer for user */
+        } pb_list;                              /*!< List phonebook entries */
         struct {
-            lwgsm_mem_t mem;           /*!< Memory to use */
-            lwgsm_pb_entry_t* entries; /*!< Pointer to entries array */
-            size_t etr;                /*!< NUmber of entries to read */
-            size_t ei;                 /*!< Current entry index */
-            size_t* er;                /*!< Final entries read pointer for user */
-            const char* search;        /*!< Search string */
-        } pb_search;                 /*!< Search phonebook entries */
+            lwgsm_mem_t mem;                    /*!< Memory to use */
+            lwgsm_pb_entry_t* entries;          /*!< Pointer to entries array */
+            size_t etr;                         /*!< NUmber of entries to read */
+            size_t ei;                          /*!< Current entry index */
+            size_t* er;                         /*!< Final entries read pointer for user */
+            const char* search;                 /*!< Search string */
+        } pb_search;                            /*!< Search phonebook entries */
 #endif                           /* LWGSM_CFG_PHONEBOOK || __DOXYGEN__ */
 #if LWGSM_CFG_USSD || __DOXYGEN__
         struct {
-            const char* code;      /*!< Code to send */
-            char* resp;            /*!< Response array */
-            size_t resp_len;       /*!< Length of response array */
-            uint8_t read;          /*!< Flag indicating we can read the COPS actual data */
-            size_t resp_write_ptr; /*!< Write pointer for response */
-            uint8_t quote_det;     /*!< Information if quote has been detected */
-        } ussd;                  /*!< Execute USSD command */
+            const char* code;                   /*!< Code to send */
+            char* resp;                         /*!< Response array */
+            size_t resp_len;                    /*!< Length of response array */
+            uint8_t read;                       /*!< Flag indicating we can read the COPS actual data */
+            size_t resp_write_ptr;              /*!< Write pointer for response */
+            uint8_t quote_det;                  /*!< Information if quote has been detected */
+        } ussd;                                 /*!< Execute USSD command */
 #endif
 #if LWGSM_CFG_GNSS || __DOXYGEN__
         // AMIN
         struct {
-            uint8_t power;        /*!< Power state to set */
-            uint32_t baudrate;    /*!< Baudrate for GNSS port */
-            uint8_t urc_interval; /*!< Urc report */
-        } gnss;                 /*!< Execute USSD command */
+            uint8_t power;                      /*!< Power state to set */
+            uint32_t baudrate;                  /*!< Baudrate for GNSS port */
+            uint8_t urc_interval;               /*!< Urc report */
+        } gnss;                                 /*!< Execute USSD command */
         // AMIN
 #endif
 #if LWGSM_CFG_HTTP || __DOXYGEN__
         struct {
-            const char* param_tag;   /*!< Tag to set in HTTP header */
-            const char* param_value; /*!< Value correspond to Tag in HTTP header */
-        } http_set_param;          /*!< Set HTTP header parameter */
+            const char* param_tag;              /*!< Tag to set in HTTP header */
+            const char* param_value;            /*!< Value correspond to Tag in HTTP header */
+        } http_set_param;                       /*!< Set HTTP header parameter */
 
         struct {
-            uint8_t* buffer;   /*!< Buffer to store HTTP response */
-            uint8_t method;    /*!< HTTP method */
-            size_t read_start; /*!< Start position to read */
-            size_t read_end;   /*!< End position to read */
-        } http;              /*!<  HTTP message data */
+            uint8_t* buffer;                    /*!< Buffer to store HTTP response */
+            uint8_t method;                     /*!< HTTP method */
+            size_t read_start;                  /*!< Start position to read */
+            size_t read_end;                    /*!< End position to read */
+        } http;                                 /*!<  HTTP message data */
 
         struct {
-            lwgsm_sapbr_cmd_type_t cmd_type; /*!< CMD type */
-            uint8_t cid;                     /*!< Bearer Profile ID */
-            const char* con_param_tag;       /*!< Connection parameter Key */
-            const char* con_param_value;     /*!< Connection parameter Value */
+            lwgsm_sapbr_cmd_type_t cmd_type;    /*!< CMD type */
+            uint8_t cid;                        /*!< Bearer Profile ID */
+            const char* con_param_tag;          /*!< Connection parameter Key */
+            const char* con_param_value;        /*!< Connection parameter Value */
         } sapbr;
 #endif
 #if LWGSM_CFG_NETWORK || __DOXYGEN__
         struct {
-            const char* apn;  /*!< APN address */
-            const char* user; /*!< APN username */
-            const char* pass; /*!< APN password */
-        } network_attach;   /*!< Settings for network attach */
+            const char* apn;                    /*!< APN address */
+            const char* user;                   /*!< APN username */
+            const char* pass;                   /*!< APN password */
+        } network_attach;                       /*!< Settings for network attach */
 #endif                  /* LWGSM_CFG_NETWORK || __DOXYGEN__ */
-    } msg;                /*!< Group of different possible message contents */
+    } msg;                                      /*!< Group of different possible message contents */
 } lwgsm_msg_t;
 
 /**
  * \brief           IP and MAC structure with netmask and gateway addresses
  */
 typedef struct {
-    lwgsm_ip_t ip;   /*!< IP address */
-    lwgsm_ip_t gw;   /*!< Gateway address */
-    lwgsm_ip_t nm;   /*!< Netmask address */
-    lwgsm_mac_t mac; /*!< MAC address */
+    lwgsm_ip_t ip;                              /*!< IP address */
+    lwgsm_ip_t gw;                              /*!< Gateway address */
+    lwgsm_ip_t nm;                              /*!< Netmask address */
+    lwgsm_mac_t mac;                            /*!< MAC address */
 } lwgsm_ip_mac_t;
 
 /**
  * \brief           Link connection active info
  */
 typedef struct {
-    uint8_t failed;           /*!< Status if connection successful */
-    uint8_t num;              /*!< Connection number */
-    uint8_t is_server;        /*!< Status if connection is client or server */
-    lwgsm_conn_type_t type;   /*!< Connection type */
-    lwgsm_ip_t remote_ip;     /*!< Remote IP address */
-    lwgsm_port_t remote_port; /*!< Remote port */
-    lwgsm_port_t local_port;  /*!< Local port number */
+    uint8_t failed;                             /*!< Status if connection successful */
+    uint8_t num;                                /*!< Connection number */
+    uint8_t is_server;                          /*!< Status if connection is client or server */
+    lwgsm_conn_type_t type;                     /*!< Connection type */
+    lwgsm_ip_t remote_ip;                       /*!< Remote IP address */
+    lwgsm_port_t remote_port;                   /*!< Remote port */
+    lwgsm_port_t local_port;                    /*!< Local port number */
 } lwgsm_link_conn_t;
 
 /**
  * \brief           Callback function linked list prototype
  */
 typedef struct lwgsm_evt_func {
-    struct lwgsm_evt_func* next; /*!< Next function in the list */
-    lwgsm_evt_fn fn;             /*!< Function pointer itself */
+    struct lwgsm_evt_func* next;                /*!< Next function in the list */
+    lwgsm_evt_fn fn;                            /*!< Function pointer itself */
 } lwgsm_evt_func_t;
 
 /**
@@ -614,10 +614,10 @@ typedef struct lwgsm_evt_func {
  * \brief           SMS memory information
  */
 typedef struct {
-    uint32_t mem_available; /*!< Bit field of available memories */
-    lwgsm_mem_t current;    /*!< Current memory choice */
-    size_t total;           /*!< Size of memory in units of entries */
-    size_t used;            /*!< Number of used entries */
+    uint32_t mem_available;                     /*!< Bit field of available memories */
+    lwgsm_mem_t current;                        /*!< Current memory choice */
+    size_t total;                               /*!< Size of memory in units of entries */
+    size_t used;                                /*!< Number of used entries */
 } lwgsm_sms_mem_t;
 
 /**
@@ -625,10 +625,10 @@ typedef struct {
  * \brief           SMS structure
  */
 typedef struct {
-    uint8_t ready;   /*!< Flag indicating feature ready by device */
-    uint8_t enabled; /*!< Flag indicating feature enabled */
+    uint8_t ready;                              /*!< Flag indicating feature ready by device */
+    uint8_t enabled;                            /*!< Flag indicating feature enabled */
 
-    lwgsm_sms_mem_t mem[3]; /*!< 3 memory info for operation,receive,sent storage */
+    lwgsm_sms_mem_t mem[3];                     /*!< 3 memory info for operation,receive,sent storage */
 } lwgsm_sms_t;
 
 /**
@@ -636,10 +636,10 @@ typedef struct {
  * \brief           SMS memory information
  */
 typedef struct {
-    uint32_t mem_available; /*!< Bit field of available memories */
-    lwgsm_mem_t current;    /*!< Current memory choice */
-    size_t total;           /*!< Size of memory in units of entries */
-    size_t used;            /*!< Number of used entries */
+    uint32_t mem_available;                     /*!< Bit field of available memories */
+    lwgsm_mem_t current;                        /*!< Current memory choice */
+    size_t total;                               /*!< Size of memory in units of entries */
+    size_t used;                                /*!< Number of used entries */
 } lwgsm_pb_mem_t;
 
 /**
@@ -647,28 +647,28 @@ typedef struct {
  * \brief           Phonebook structure
  */
 typedef struct {
-    uint8_t ready;   /*!< Flag indicating feature ready by device */
-    uint8_t enabled; /*!< Flag indicating feature enabled */
+    uint8_t ready;                              /*!< Flag indicating feature ready by device */
+    uint8_t enabled;                            /*!< Flag indicating feature enabled */
 
-    lwgsm_pb_mem_t mem; /*!< Memory information */
+    lwgsm_pb_mem_t mem;                         /*!< Memory information */
 } lwgsm_pb_t;
 
 /**
  * \brief           SIM structure
  */
 typedef struct {
-    lwgsm_sim_state_t state; /*!< Current SIM status */
+    lwgsm_sim_state_t state;                    /*!< Current SIM status */
 } lwgsm_sim_t;
 
 /**
  * \brief           Network info
  */
 typedef struct {
-    lwgsm_network_reg_status_t status;   /*!< Network registration status */
-    lwgsm_operator_curr_t curr_operator; /*!< Current operator information */
+    lwgsm_network_reg_status_t status;          /*!< Network registration status */
+    lwgsm_operator_curr_t curr_operator;        /*!< Current operator information */
 
-    uint8_t is_attached; /*!< Flag indicating device is attached and PDP context is active */
-    lwgsm_ip_t ip_addr;  /*!< Device IP address when network PDP context is enabled */
+    uint8_t is_attached;                        /*!< Flag indicating device is attached and PDP context is active */
+    lwgsm_ip_t ip_addr;                         /*!< Device IP address when network PDP context is enabled */
 } lwgsm_network_t;
 
 /**
@@ -676,40 +676,40 @@ typedef struct {
  */
 typedef struct {
     /* Device identification */
-    char model_manufacturer[20];  /*!< Device manufacturer */
-    char model_number[20];        /*!< Device model number */
-    char model_serial_number[20]; /*!< Device serial number */
-    char model_revision[20];      /*!< Device revision */
-    lwgsm_device_model_t model;   /*!< Device model */
+    char model_manufacturer[20];                /*!< Device manufacturer */
+    char model_number[20];                      /*!< Device model number */
+    char model_serial_number[20];               /*!< Device serial number */
+    char model_revision[20];                    /*!< Device revision */
+    lwgsm_device_model_t model;                 /*!< Device model */
 
     /* Network&operator specific */
-    lwgsm_sim_t sim;         /*!< SIM data */
-    lwgsm_network_t network; /*!< Network status */
-    int16_t rssi;            /*!< RSSI signal strength. `0` = invalid, `-53 % -113` = valid */
+    lwgsm_sim_t sim;                            /*!< SIM data */
+    lwgsm_network_t network;                    /*!< Network status */
+    int16_t rssi;                               /*!< RSSI signal strength. `0` = invalid, `-53 % -113` = valid */
 
     /* Device specific */
 #if LWGSM_CFG_CONN || __DOXYGEN__
-    uint8_t active_conns_cur_parse_num; /*!< Current connection number used for parsing */
+    uint8_t active_conns_cur_parse_num;         /*!< Current connection number used for parsing */
 
-    lwgsm_conn_t conns[LWGSM_CFG_MAX_CONNS]; /*!< Array of all connection structures */
-    lwgsm_ipd_t ipd;                         /*!< Connection incoming data structure */
-    uint8_t conn_val_id;                     /*!< Validation ID increased each time device connects to network */
+    lwgsm_conn_t conns[LWGSM_CFG_MAX_CONNS];    /*!< Array of all connection structures */
+    lwgsm_ipd_t ipd;                            /*!< Connection incoming data structure */
+    uint8_t conn_val_id;                        /*!< Validation ID increased each time device connects to network */
 #endif                                     /* LWGSM_CFG_CONNS || __DOXYGEN__ */
 #if LWGSM_CFG_SMS || __DOXYGEN__
-    lwgsm_sms_t sms; /*!< SMS information */
+    lwgsm_sms_t sms;                            /*!< SMS information */
 #endif             /* LWGSM_CFG_SMS || __DOXYGEN__ */
 #if LWGSM_CFG_PHONEBOOK || __DOXYGEN__
-    lwgsm_pb_t pb; /*!< Phonebook information */
+    lwgsm_pb_t pb;                              /*!< Phonebook information */
 #endif           /* LWGSM_CFG_PHONEBOOK || __DOXYGEN__ */
 #if LWGSM_CFG_CALL || __DOXYGEN__
-    lwgsm_call_t call; /*!< Call information */
+    lwgsm_call_t call;                          /*!< Call information */
 #endif               /* LWGSM_CFG_CALL || __DOXYGEN__ */
     // AMIN
 #if LWGSM_CFG_GNSS || __DOXYGEN__
-    lwgsm_gnss_t gnss; /*!< GNSS information */
+    lwgsm_gnss_t gnss;                          /*!< GNSS information */
 #endif               /* LWGSM_CFG_GNSS || __DOXYGEN__ */
 #if LWGSM_CFG_HTTP || __DOXYGEN__
-    lwgsm_http_t http; /*!< GNSS information */
+    lwgsm_http_t http;                          /*!< GNSS information */
 #endif
 } lwgsm_modules_t;
 // AMIN
@@ -718,49 +718,49 @@ typedef struct {
  * \brief           GSM global structure
  */
 typedef struct {
-    size_t locked_cnt; /*!< Counter how many times (recursive) stack is currently locked */
+    size_t locked_cnt;                          /*!< Counter how many times (recursive) stack is currently locked */
 
-    lwgsm_sys_sem_t sem_sync;          /*!< Synchronization semaphore between threads */
-    lwgsm_sys_mbox_t mbox_producer;    /*!< Producer message queue handle */
-    lwgsm_sys_mbox_t mbox_process;     /*!< Consumer message queue handle */
-    lwgsm_sys_thread_t thread_produce; /*!< Producer thread handle */
-    lwgsm_sys_thread_t thread_process; /*!< Processing thread handle */
+    lwgsm_sys_sem_t sem_sync;                   /*!< Synchronization semaphore between threads */
+    lwgsm_sys_mbox_t mbox_producer;             /*!< Producer message queue handle */
+    lwgsm_sys_mbox_t mbox_process;              /*!< Consumer message queue handle */
+    lwgsm_sys_thread_t thread_produce;          /*!< Producer thread handle */
+    lwgsm_sys_thread_t thread_process;          /*!< Processing thread handle */
 #if !LWGSM_CFG_INPUT_USE_PROCESS || __DOXYGEN__
-    lwgsm_buff_t buff; /*!< Input processing buffer */
+    lwgsm_buff_t buff;                          /*!< Input processing buffer */
 #endif               /* !LWGSM_CFG_INPUT_USE_PROCESS || __DOXYGEN__ */
-    lwgsm_ll_t ll;     /*!< Low level functions */
+    lwgsm_ll_t ll;                              /*!< Low level functions */
 
-    lwgsm_msg_t* msg; /*!< Pointer to current user message being executed */
+    lwgsm_msg_t* msg;                           /*!< Pointer to current user message being executed */
 
-    lwgsm_evt_t evt;            /*!< Callback processing structure */
-    lwgsm_evt_func_t* evt_func; /*!< Callback function linked list */
+    lwgsm_evt_t evt;                            /*!< Callback processing structure */
+    lwgsm_evt_func_t* evt_func;                 /*!< Callback function linked list */
 
-    lwgsm_modules_t m; /*!< All modules. When resetting, reset structure */
+    lwgsm_modules_t m;                          /*!< All modules. When resetting, reset structure */
 
     union {
         struct {
-            uint8_t initialized : 1; /*!< Flag indicating GSM library is initialized */
-            uint8_t dev_present : 1; /*!< Flag indicating GSM device is present */
-        } f;                       /*!< Flags structure */
-    } status;                    /*!< Status structure */
+            uint8_t initialized : 1;            /*!< Flag indicating GSM library is initialized */
+            uint8_t dev_present : 1;            /*!< Flag indicating GSM device is present */
+        } f;                                    /*!< Flags structure */
+    } status;                                   /*!< Status structure */
 } lwgsm_t;
 
 /**
  * \brief           Memory mapping structure between string and value in app
  */
 typedef struct {
-    lwgsm_mem_t mem;     /*!< Mem indication */
-    const char* mem_str; /*!< Memory string */
+    lwgsm_mem_t mem;                            /*!< Mem indication */
+    const char* mem_str;                        /*!< Memory string */
 } lwgsm_dev_mem_map_t;
 
 /**
  * \brief           Device models map between model and other information
  */
 typedef struct {
-    lwgsm_device_model_t model; /*!< Device model */
-    const char* id_str;         /*!< Model string identification */
-    uint8_t is_2g;              /*!< Status if modem is 2G */
-    uint8_t is_lte;             /*!< Status if modem is LTE */
+    lwgsm_device_model_t model;                 /*!< Device model */
+    const char* id_str;                         /*!< Model string identification */
+    uint8_t is_2g;                              /*!< Status if modem is 2G */
+    uint8_t is_lte;                             /*!< Status if modem is LTE */
 } lwgsm_dev_model_map_t;
 
 /**
@@ -768,10 +768,10 @@ typedef struct {
  * \brief           Unicode support structure
  */
 typedef struct {
-    uint8_t ch[4]; /*!< UTF-8 max characters */
-    uint8_t t;     /*!< Total expected length in UTF-8 sequence */
-    uint8_t r;     /*!< Remaining bytes in UTF-8 sequence */
-    lwgsmr_t res;  /*!< Current result of processing */
+    uint8_t ch[4];                              /*!< UTF-8 max characters */
+    uint8_t t;                                  /*!< Total expected length in UTF-8 sequence */
+    uint8_t r;                                  /*!< Remaining bytes in UTF-8 sequence */
+    lwgsmr_t res;                               /*!< Current result of processing */
 } lwgsm_unicode_t;
 
 /**

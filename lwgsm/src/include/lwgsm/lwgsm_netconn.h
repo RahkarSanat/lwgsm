@@ -58,9 +58,9 @@ typedef struct lwgsm_netconn* lwgsm_netconn_p;
  * \brief           Netconn connection type
  */
 typedef enum {
-    LWGSM_NETCONN_TYPE_TCP = LWGSM_CONN_TYPE_TCP, /*!< TCP connection */
-    LWGSM_NETCONN_TYPE_UDP = LWGSM_CONN_TYPE_UDP, /*!< UDP connection */
-    LWGSM_NETCONN_TYPE_SSL = LWGSM_CONN_TYPE_SSL, /*!< TCP connection over SSL */
+    LWGSM_NETCONN_TYPE_TCP = LWGSM_CONN_TYPE_TCP,   /*!< TCP connection */
+    LWGSM_NETCONN_TYPE_UDP = LWGSM_CONN_TYPE_UDP,   /*!< UDP connection */
+    LWGSM_NETCONN_TYPE_SSL = LWGSM_CONN_TYPE_SSL,   /*!< TCP connection over SSL */
 } lwgsm_netconn_type_t;
 
 lwgsm_netconn_p lwgsm_netconn_new(lwgsm_netconn_type_t type);

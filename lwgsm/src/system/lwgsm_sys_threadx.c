@@ -243,9 +243,9 @@ lwgsm_sys_thread_create(lwgsm_sys_thread_t* t, const char* name, lwgsm_sys_threa
 
     /* First process thread object */
     if (t != NULL) {
-        t_handle = t; /* Use static handle from parameter */
+        t_handle = t;                           /* Use static handle from parameter */
     } else if (tx_byte_allocate(lwgsm_threadx_byte_pool, (void*)&t_handle, sizeof(*t_handle), TX_NO_WAIT) == TX_SUCCESS) {
-        t_handle_dynamic = 1; /* Handle has been dynamically allocated */
+        t_handle_dynamic = 1;                   /* Handle has been dynamically allocated */
     } else {
         goto cleanup;
     }

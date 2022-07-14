@@ -347,7 +347,7 @@ prv_configure_uart(uint32_t baudrate) {
  */
 static uint8_t
 prv_reset_device(uint8_t state) {
-    if (state) { /* Activate reset line */
+    if (state) {                                /* Activate reset line */
         // LL_GPIO_ResetOutputPin(LWGSM_RESET_PORT, LWGSM_RESET_PIN);
     } else {
         // LL_GPIO_SetOutputPin(LWGSM_RESET_PORT, LWGSM_RESET_PIN);
@@ -412,16 +412,16 @@ prv_send_data(const void* data, size_t len) {
 lwgsmr_t
 lwgsm_ll_init(lwgsm_ll_t* ll) {
     if (!lwgsm_initialized) {
-        ll->send_fn = prv_send_data; /* Set callback function to send data */
+        ll->send_fn = prv_send_data;            /* Set callback function to send data */
 #if defined(LWGSM_RST_PIN)
-        ll->reset_fn = prv_reset_device; /* Set callback for hardware reset */
+        ll->reset_fn = prv_reset_device;        /* Set callback for hardware reset */
 #endif                               /* defined(LWGSM_RST_PIN) */
 
         /* Initialize buffer for TX */
         lwgsm_tx_len = 0;
         lwrb_init(&lwgsm_tx_rb, lwgsm_tx_rb_data, sizeof(lwgsm_tx_rb_data));
     }
-    prv_configure_uart(ll->uart.baudrate); /* Initialize UART for communication */
+    prv_configure_uart(ll->uart.baudrate);      /* Initialize UART for communication */
     lwgsm_initialized = 1;
     return lwgsmOK;
 }

@@ -75,7 +75,7 @@ send_data(const void* data, size_t len) {
         // uart_wait_tx_done(GSM_UART_NUM, portMAX_DELAY);
         ESP_LOG_BUFFER_HEXDUMP(">", data, len, ESP_LOG_DEBUG);
     }
-    return len; /* Return number of bytes actually sent to AT port */
+    return len;                                 /* Return number of bytes actually sent to AT port */
 }
 
 static void
@@ -149,7 +149,7 @@ lwgsmr_t
 lwgsm_ll_init(lwgsm_ll_t* ll) {
 #if !LWGSM_CFG_MEM_CUSTOM
     /* Step 1: Configure memory for dynamic allocations */
-    static uint8_t memory[0x10000]; /* Create memory for dynamic allocations with specific size */
+    static uint8_t memory[0x10000];             /* Create memory for dynamic allocations with specific size */
 
     /*
      * Create region(s) of memory.
@@ -158,17 +158,17 @@ lwgsm_ll_init(lwgsm_ll_t* ll) {
      */
     lwgsm_mem_region_t mem_regions[] = {{memory, sizeof(memory)}};
     if (!initialized) {
-        lwgsm_mem_assignmemory(mem_regions, LWGSM_ARRAYSIZE(mem_regions)); /* Assign memory for allocations to GSM library */
+        lwgsm_mem_assignmemory(mem_regions, LWGSM_ARRAYSIZE(mem_regions));  /* Assign memory for allocations to GSM library */
     }
 #endif /* !LWGSM_CFG_MEM_CUSTOM */
 
     /* Step 2: Set AT port send function to use when we have data to transmit */
     if (!initialized) {
-        ll->send_fn = send_data; /* Set callback function to send data */
+        ll->send_fn = send_data;                /* Set callback function to send data */
     }
 
     /* Step 3: Configure AT port to be able to send/receive data to/from GSM device */
-    configure_uart(ll->uart.baudrate); /* Initialize UART for communication */
+    configure_uart(ll->uart.baudrate);          /* Initialize UART for communication */
     xTaskCreate(uart_event_task, "uart_lwgsm_task0", 4096, NULL, 5, NULL);
     initialized = 1;
     return lwgsmOK;
@@ -182,7 +182,7 @@ lwgsm_ll_init(lwgsm_ll_t* ll) {
 lwgsmr_t
 lwgsm_ll_deinit(lwgsm_ll_t* ll) {
     ESP_ERROR_CHECK(uart_driver_delete(GSM_UART_NUM));
-    initialized = 0; /* Clear initialized flag */
+    initialized = 0;                            /* Clear initialized flag */
     return lwgsmOK;
 }
 
